@@ -17,6 +17,18 @@
 <body>
     <div class="menu_content d-flex flex-column align-items-center justify-content-center text-center">
         <div class="menu_close_container"><div class="menu_close"></div></div>
+        <h1>Login Page</h1>
+        <!-- <p>로그인한 사용자들만 접속이 가능합니다.</p> -->
+        <form action="/login" method="post">
+            <input type="text" name="name" placeholder="아이디를 입력하세요.">
+            <br>
+            <input type="password" name="pwd" placeholder="비밀번호를 입력하세요.">
+            <br>
+            <input type="submit" value="로그인">
+        </form>
+        <a href="/joinPage">신규 가입</a>
+        <a href="/board">홈으로 이동</a>
+    
     </div>
 </body>
 </html>

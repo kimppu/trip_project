@@ -21,8 +21,10 @@ public class UserEntity {
     @Id // 기본키: 유니크 
     private String name;
     private String pwd;
+    private String nickname;
     @Column(unique = true)
     private String email;
+    private String phone;
     // 일반사용자 / 관리자를 구분용
     private String role; 
     // 로그인 유무
