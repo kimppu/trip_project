@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service;
 import com.example.travelproject.domain.user.model.UserEntity;
 import com.example.travelproject.domain.user.model.UserRepository;
 
+
 @Service
 public class UserService {
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+    
     @Autowired
     private UserRepository userRepository;
 
@@ -42,4 +44,5 @@ public class UserService {
         // 신규 유저 database에 저장!!
         userRepository.save(dto);
     }
+
 }
