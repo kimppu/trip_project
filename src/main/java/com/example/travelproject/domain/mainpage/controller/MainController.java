@@ -29,9 +29,7 @@ public class MainController {
     public String index(Authentication authentication, Model model) {
         if(authentication != null) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            model.addAttribute("menuTitle", "홈");
         }
-        model.addAttribute("menuTitle", "홈");
         return "index";
     }
 
@@ -62,7 +60,6 @@ public class MainController {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("username", userDetails.getUsername());
-        model.addAttribute("menuTitle", "홈");
         return "staff/user";
     }
 

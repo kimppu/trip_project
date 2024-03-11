@@ -11,7 +11,6 @@ public class BoardController {
 
     @GetMapping({"","/"})
     public String mainBoard(Model model){
-        model.addAttribute("menuTitle","게시판");
         return "board/boardMain";
     }
 }
