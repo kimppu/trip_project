@@ -10,24 +10,28 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.example.travelproject.global.handler.LoginAuthFailureHandler;
+import com.example.travelproject.global.config.handler.LoginAuthFailureHandler;
+import com.example.travelproject.global.config.handler.LoginAuthSuccessHandler;
+import com.example.travelproject.global.config.handler.LogoutAuthSuccesshandler;
 
-@Configuration
-@EnableWebSecurity
-@EnableMethodSecurity(securedEnabled = true,prePostEnabled = true)
+@Configuration // 스프링 설정 파일!!
+@EnableWebSecurity // 여러가지 설정 중에서 시큐리티 설정!!
+// @Secured 어노테이션 활성화, @PreAuthorize 어노테이션 활성화  
+@EnableMethodSecurity(securedEnabled = true, prePostEnabled = true) 
 public class SecurityConfig {
+    
     // 비밀번호 암호화에서 사용할 객체
     @Bean
     public BCryptPasswordEncoder eCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // @Autowired
-    // private LoginAuthSuccessHandler loginAuthSuccessHandler;
+    @Autowired
+    private LoginAuthSuccessHandler loginAuthSuccessHandler;
     @Autowired
     private LoginAuthFailureHandler loginAuthFailureHandler;
-    // @Autowired
-    // private LogoutAuthSuccesshandler logoutAuthSuccesshandler;
+    @Autowired
+    private LogoutAuthSuccesshandler logoutAuthSuccesshandler;
 
     // @Bean
     // public AuthenticationSuccessHandler loginAuthSuccessHandler() {
@@ -82,7 +86,7 @@ public class SecurityConfig {
                 // Controller에서는 해당 "/login"을 만들 필요가 없음!! 
                 .loginProcessingUrl("/login")
                 // 로그인 성공시 
-                // .successHandler(loginAuthSuccessHandler)
+                .successHandler(loginAuthSuccessHandler)
                 // .defaultSuccessUrl("/user/index")
                 // 로그인 실패시 
                 .failureHandler(loginAuthFailureHandler)
@@ -94,11 +98,12 @@ public class SecurityConfig {
                 // 로그아웃 요청 url path 
                 .logoutUrl("/logout")
                 // 로그아웃 성공시
-                // .logoutSuccessHandler(logoutAuthSuccesshandler)
+                .logoutSuccessHandler(logoutAuthSuccesshandler)
                 .permitAll()
             );
 
         // 위에서 설정한 인증 & 인가를 Spring Boot Configuration에 적용!!
         return http.build();
     }
+
 }

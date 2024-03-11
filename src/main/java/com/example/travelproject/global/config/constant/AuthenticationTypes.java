@@ -1,4 +1,4 @@
-package com.example.travelproject.global.constant;
+package com.example.travelproject.global.config.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

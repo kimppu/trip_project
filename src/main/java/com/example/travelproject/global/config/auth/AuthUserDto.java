@@ -1,4 +1,4 @@
-package com.example.travelproject.global.auth;
+package com.example.travelproject.global.config.auth;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,11 +10,14 @@ import com.example.travelproject.domain.user.model.UserEntity;
 
 import lombok.AllArgsConstructor;
 
+// Spring Security가 사용할 수 있는 전용 Dto(UserDetails)를 정의함!!
+// 우리가 만든 UserDto를 이용하여 UserDetails를 정의함!!
 @AllArgsConstructor
-public class AuthUserDto implements UserDetails{
+public class AuthUserDto implements UserDetails {
 
     private UserEntity userDto;
-    
+
+    // 권한(들)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
@@ -31,38 +34,36 @@ public class AuthUserDto implements UserDetails{
 
     @Override
     public String getPassword() {
-        // TODO Auto-generated method stub
-        return null;
+        return userDto.getPwd();
     }
 
     @Override
     public String getUsername() {
-        // TODO Auto-generated method stub
-        return null;
+        return userDto.getName();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        return false;
+        // 계정 만료 유무 확인 
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        return false;
+        // 계정 잠긴 유무 확인
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
-        return false;
+        // 계정 비번 오래 사용했는지 유무 확인 
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        return false;
+        // 활성화된 계정인지 유무 확인  
+        return true;
     }
     
 }
