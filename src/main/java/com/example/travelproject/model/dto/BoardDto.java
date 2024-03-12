@@ -1,5 +1,7 @@
 package com.example.travelproject.model.dto;
 
+import com.example.travelproject.model.entity.UserEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

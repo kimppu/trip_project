@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/board")
 public class BoardController {
     
-    @GetMapping({"","/"})
+    @GetMapping()
     public String mainBoard(Model model){
         return "board/boardMain";
     }

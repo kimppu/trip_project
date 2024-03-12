@@ -34,7 +34,7 @@ public class UserEntity {
     private String userNm;
     private String userSex;
     @NotBlank
-    @Pattern(regexp = "^01(?:0|1|[6-9])-?\\d{3,4}-?\\d{4}$", message = "올바른 전화번로를 입력해주세요.")
+    @Pattern(regexp = "^01(?:0|1|[6-9])-?\\d{3,4}-?\\d{4}$", message = "올바른 전화번호를 입력해주세요.")
     private String userPhNmb;
     // 일반사용자 / 관리자를 구분용
     private String role;
