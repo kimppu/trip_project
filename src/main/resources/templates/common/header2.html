@@ -31,15 +31,18 @@
 					<div class="col d-flex flex-row">
 						<div class="user_box ml-auto my-auto">
 							<div class="user_box_link">
-								{{#userNm}}
+								{{#username}}
 								<a class="user_info btn btn-link p-1" role="button" href="#">
 									<i class="fas fa-circle-user"></i>
-									<span>재전</span>
+									<span>{{username}}님 반갑습니다.</span>
 								</a>
-								{{/userNm}}
+								{{/username}}
 								{{^userId}}
-								<a class="user_join btn btn-light my-1 px-1 py-0" role="button" href="/loginPage" style="font-size:15px;" >
-									로그인 / 회원가입
+								<a class="user_logout btn btn-light my-1 px-1 py-0" role="button" href="/logout" style="font-size:15px;" >
+									로그아웃
+								</a>
+								<a class="user_mypage btn btn-light my-1 px-1 py-0" role="button" href="/mypage" style="font-size:15px;" >
+									마이페이지
 								</a>
 								{{/userId}}
 							</div> 
@@ -60,7 +63,7 @@
 						</div>
 						<div class="main_nav_container ml-auto">
 							<ul class="main_nav_list">
-								<li class="main_nav_item active"><a href="/">홈</a></li>
+								<li class="main_nav_item"><a href="/">홈</a></li>
 								<li class="main_nav_item"><a href="/lodge">숙박</a></li>
 								<li class="main_nav_item"><a href="/plan">일정</a></li>
 								<li class="main_nav_item"><a href="/board">게시판</a></li>
@@ -91,7 +94,7 @@
 
 					<div class="home_slider_content text-center">
 						<div class="home_slider_content_inner">
-							<h1 class="main_nav_item_select">홈</h1>
+							<h1>{{menuTitle}}</h1>
 						</div>
 					</div>
 				</div>

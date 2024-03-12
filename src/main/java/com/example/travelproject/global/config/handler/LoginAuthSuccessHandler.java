@@ -29,7 +29,7 @@ public class LoginAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandl
       Authentication authentication) throws IOException, ServletException {
       log.info("[LoginAuthSuccessHandler][onAuthenticationSuccess] Start");
     UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-    userService.updateIsLoginByName(userDetails.getUsername(), true);
+    userService.updateIsLoginById(userDetails.getUsername(), true);
     response.sendRedirect("/user/index");
     super.onAuthenticationSuccess(request, response, authentication);
   }
