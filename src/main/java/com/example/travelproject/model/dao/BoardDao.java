@@ -2,6 +2,7 @@ package com.example.travelproject.model.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 import com.example.travelproject.model.entity.BoardEntity;
 import com.example.travelproject.model.repository.BoardRepository;
@@ -28,16 +29,13 @@ public class BoardDao {
     }
 
     // 게시글 선택 : select
-    public BoardEntity selectByNotice(long noticeId){
-        return boardRepository.selectByNotice(noticeId);
+    public BoardEntity findByNoticeId(long noticeId){
+        return boardRepository.findByNoticeId(noticeId);
     }
 
     // 게시글 목록 : show
-    public BoardEntity showNotice(){
-        return boardRepository.showNotice();
+    public List<BoardEntity> showAllPage(){
+        return boardRepository.showAllPage();
     }
-
-    
-
 
 }
