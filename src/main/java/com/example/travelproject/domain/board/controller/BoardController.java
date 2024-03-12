@@ -22,13 +22,15 @@ public class BoardController {
 
     //게시글 작성
     @GetMapping("/articleform")
-    public String newArticleForm(){    
+    public String newArticleForm(Model model){
+        model.addAttribute("menuTitle","게시판");    
         return "board/articleForm";
     }
 
     //작성된 게시글 저장
     @PostMapping("/articleform/create")
-    public String createArticle(ArticleDto dto){
+    public String createArticle(ArticleDto dto, Model model){
+        model.addAttribute("menuTitle","게시판"); 
         System.out.println(dto);
         return ""; 
     }
