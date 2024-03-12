@@ -6,7 +6,7 @@ import java.util.List;
 import com.example.travelproject.model.entity.BoardEntity;
 
 public interface BoardRepository extends JpaRepository<BoardEntity, Long>{
-    public BoardEntity selectByNotice(long noticeId);
+    public BoardEntity findByNoticeId(long noticeId);
 
     @Query(value = "select * from board order by createDate desc", nativeQuery = true)
     public List<BoardEntity> showAllPage();
