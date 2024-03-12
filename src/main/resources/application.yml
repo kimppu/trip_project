@@ -36,4 +36,8 @@ spring:
 
   mvc:
     static-path-pattern: /static/**
-
+  devtools:
+      restart:
+        enabled: true
+      livereload:
+        enabled: true
