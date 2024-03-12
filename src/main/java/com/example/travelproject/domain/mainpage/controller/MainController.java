@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.travelproject.domain.user.model.UserEntity;
+import com.example.travelproject.domain.user.model.entity.UserEntity;
 import com.example.travelproject.domain.user.service.UserService;
 
 
@@ -25,11 +25,12 @@ public class MainController {
     /*
      * 누구나 접근 가능
      */
-    @GetMapping("/index")
+    @GetMapping({"/index","/"})
     public String index(Authentication authentication, Model model) {
         if(authentication != null) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             model.addAttribute("menuTitle", "홈");
+            return "staff/user";
         }
         model.addAttribute("menuTitle", "홈");
         return "index";
