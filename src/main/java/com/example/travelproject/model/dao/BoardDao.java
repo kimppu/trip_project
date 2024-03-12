@@ -1,5 +1,6 @@
 package com.example.travelproject.model.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import com.example.travelproject.model.repository.BoardRepository;
 
 @Service
 public class BoardDao {
+    
+    @Autowired
     private BoardRepository boardRepository; 
 
     // 글 작성 : insert

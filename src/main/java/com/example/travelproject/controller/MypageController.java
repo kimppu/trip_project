@@ -57,10 +57,9 @@ public class MypageController {
 
     @GetMapping("/signout")
     public String signout(Authentication authentication) {
-        log.info("[signout]: " + authentication.getName());
+        log.info("[signout]: " + authentication);
         userService.deleteUser(authentication.getName());
-
-        return "/";
+        return "redirect:/index";
     }
     
 }
