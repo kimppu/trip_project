@@ -16,7 +16,9 @@ import com.example.travelproject.model.entity.UserEntity;
 import com.example.travelproject.model.repository.UserRepository;
 import com.example.travelproject.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class MainController {
     
@@ -31,11 +33,15 @@ public class MainController {
      */
     @GetMapping({"/index","/"})
     public String index(Authentication authentication, Model model) {
-        if(authentication != null) {
-            model.addAttribute("menuTitle", "홈");
-            return "staff/user";
+        if (authentication == null || userRepository.getUserDtoById(authentication.getName()) == null) {
+            return "index";
         }
-        return "index";
+        if (authentication.getName().equals("admin")) {
+            return "admin/index";
+        } else {
+            log.info("[user]: " + authentication);
+            return "user/index";
+        }
     }
 
     @GetMapping("/loginPage")
@@ -65,7 +71,6 @@ public class MainController {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("username", userRepository.getUserDtoById(userDetails.getUsername()).getUserNm());
-        model.addAttribute("menuTitle", "홈");
         return "staff/user";
     }
 
@@ -79,9 +84,9 @@ public class MainController {
 
     @GetMapping("/admin/index")
     public String admin(Authentication authentication, Model model) {
-
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("username", userRepository.getUserDtoById(userDetails.getUsername()).getUserNm());
+        model.addAttribute("admin", userRepository.getUserDtoById(userDetails.getUsername()).getUserNm());
         return "staff/admin1";
     }
 
