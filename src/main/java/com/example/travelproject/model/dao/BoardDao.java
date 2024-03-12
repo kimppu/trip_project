@@ -1,8 +1,11 @@
 package com.example.travelproject.model.dao;
 
+import org.springframework.stereotype.Service;
+
 import com.example.travelproject.model.entity.BoardEntity;
 import com.example.travelproject.model.repository.BoardRepository;
 
+@Service
 public class BoardDao {
     private BoardRepository boardRepository; 
 

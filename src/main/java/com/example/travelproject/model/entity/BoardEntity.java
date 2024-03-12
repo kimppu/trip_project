@@ -30,8 +30,8 @@ public class BoardEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private long noticeId; 
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
+    // @ManyToOne
+    // @JoinColumn(name = "userId")
     private String userId; //작성자
     @Column(nullable = false)
     private String title; 
