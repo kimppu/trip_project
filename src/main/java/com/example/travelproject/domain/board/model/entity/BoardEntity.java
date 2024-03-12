@@ -1,12 +1,14 @@
 package com.example.travelproject.domain.board.model.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.mapping.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +21,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Entity(name = "Article")
+@Entity(name = "Notice")
 public class BoardEntity {
 
     // private UserEntity userEntity; 
@@ -27,7 +29,8 @@ public class BoardEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private long noticeId; 
 
-    @ManyToOne()
+    @ManyToOne
+    @JoinColumn(name = "userId")
     private String userId; //작성자
     @Column(nullable = false)
     private String title; 

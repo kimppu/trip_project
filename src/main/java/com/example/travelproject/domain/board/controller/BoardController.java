@@ -4,21 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.travelproject.domain.board.model.dto.BoardDto;
 import com.example.travelproject.domain.board.model.repository.BoardRepository;
-import com.example.travelproject.domain.board.service.ArticleService;
+import com.example.travelproject.domain.board.service.BoardService;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
     @Autowired
-    private ArticleService articleService;
-
-    @Autowired
-    private BoardRepository articleRepository;
+    private BoardService boardService;
     
     @GetMapping({"","/"})
     public String mainBoard(Model model){
@@ -32,11 +27,11 @@ public class BoardController {
         return "board/articleForm";
     }
 
-    //작성된 게시글 저장
-    @PostMapping("/articleform/create")
-    public String createArticle(BoardDto dto){
-        System.out.println(dto);
-        // ArticleService saveArticle(dto);
-        return "redirect:/board"; 
-    }
+    // //작성된 게시글 저장
+    // @PostMapping("/articleform/create")
+    // public String createArticle(BoardDto dto){
+    //     System.out.println(dto);
+    //     // ArticleService saveArticle(dto);
+    //     return "redirect:/board"; 
+    // }
 }
