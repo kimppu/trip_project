@@ -26,8 +26,8 @@ public class BoardDao {
     }
 
     // 게시글 선택 : select
-    public BoardEntity selectByNotice(long noticeId){
-        return boardRepository.selectByNotice(noticeId);
+    public BoardEntity findByNoticeId(long noticeId){
+        return boardRepository.findByNoticeId(noticeId);
     }
 
     // 게시글 목록 : show

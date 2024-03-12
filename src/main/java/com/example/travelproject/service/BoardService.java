@@ -31,18 +31,18 @@ public class BoardService {
 
     // // 글 수정 : update
     public void updateNotice(BoardDto dto){
-        BoardEntity entity = boradDao.selectByNotice(dto.getNoticeId());
+        BoardEntity entity = boradDao.findByNoticeId(dto.getNoticeId());
         boradDao.updateNotice(entity);
     }
 
     // 글 삭제 : delete
     public void deleteNotice(long noticeId){
-        BoardEntity entity = boradDao.selectByNotice(noticeId);
+        BoardEntity entity = boradDao.findByNoticeId(noticeId);
         boradDao.deleteNotice(entity.getNoticeId());
     }
 
-    public BoardDto selectByNotice(long noticeId){
-        BoardEntity entity = boradDao.selectByNotice(noticeId);
+    public BoardDto findtByNoticeId(long noticeId){
+        BoardEntity entity = boradDao.findByNoticeId(noticeId);
         BoardDto dto = new BoardDto(); 
         dto.setNoticeId(noticeId);
         dto.setUserId(entity.getUserId());
