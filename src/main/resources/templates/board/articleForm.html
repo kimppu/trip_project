@@ -1,0 +1,11 @@
+{{>common/header}}
+    <form action="/articleform/create" method="post">
+    <p>
+        제목<input type="text" name="title"/>
+    </p>
+    <p>
+        내용<textarea rows="3" name="content"></textarea><br>
+    </p>
+    <button type="submit">작성</button>
+    </form>
+{{>common/footer}}
