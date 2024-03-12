@@ -35,7 +35,6 @@ public class MainController {
             model.addAttribute("menuTitle", "홈");
             return "staff/user";
         }
-        model.addAttribute("menuTitle", "홈");
         return "index";
     }
 

@@ -31,8 +31,13 @@ spring:
     prefix: classpath:templates/
     check-template-location: true
     suffix: .html
-    cache: false
+    servlet:
+      cache: false
 
   mvc:
     static-path-pattern: /static/**
-
+  devtools:
+      restart:
+        enabled: true
+      livereload:
+        enabled: true

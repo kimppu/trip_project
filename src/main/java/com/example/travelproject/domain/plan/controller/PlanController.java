@@ -11,7 +11,6 @@ public class PlanController {
 
     @GetMapping({"","/"})
     public String mainPlan(Model model){
-        model.addAttribute("menuTitle","일정");
         return "plan/planMain";
     }
 }
