@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.travelproject.domain.user.model.dto.UserDto;
 import com.example.travelproject.domain.user.model.entity.UserEntity;
 import com.example.travelproject.domain.user.model.repository.UserRepository;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Slf4j
 @Controller
@@ -48,5 +51,12 @@ public class MypageController {
         userRepository.save(update_dto);
 
         return "redirect:/mypage";
-    }    
+    }
+
+    @PostMapping("/signout")
+    public String signout(@ModelAttribute UserEntity dto) {
+        log.info("[signout]: " + dto);
+        return "/";
+    }
+    
 }
