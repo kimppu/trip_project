@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.travelproject.domain.user.model.UserEntity;
+import com.example.travelproject.domain.user.model.entity.UserEntity;
+import com.example.travelproject.domain.user.model.repository.UserRepository;
 import com.example.travelproject.domain.user.service.UserService;
 
 
@@ -22,14 +23,17 @@ public class MainController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     /*
      * 누구나 접근 가능
      */
-    @GetMapping("/index")
+    @GetMapping({"/index","/"})
     public String index(Authentication authentication, Model model) {
         if(authentication != null) {
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             model.addAttribute("menuTitle", "홈");
+            return "staff/user";
         }
         model.addAttribute("menuTitle", "홈");
         return "index";
@@ -61,7 +65,7 @@ public class MainController {
     public String user(Authentication authentication, Model model) {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        model.addAttribute("username", userDetails.getUsername());
+        model.addAttribute("username", userRepository.getUserDtoById(userDetails.getUsername()).getUserNm());
         model.addAttribute("menuTitle", "홈");
         return "staff/user";
     }
@@ -70,7 +74,7 @@ public class MainController {
     public String manager(Authentication authentication, Model model) {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        model.addAttribute("username", userDetails.getUsername());
+        model.addAttribute("username", userRepository.getUserDtoById(userDetails.getUsername()).getUserNm());
         return "staff/manager1";
     }
 
@@ -78,7 +82,7 @@ public class MainController {
     public String admin(Authentication authentication, Model model) {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        model.addAttribute("username", userDetails.getUsername());
+        model.addAttribute("username", userRepository.getUserDtoById(userDetails.getUsername()).getUserNm());
         return "staff/admin1";
     }
 
@@ -87,7 +91,7 @@ public class MainController {
     public String secured(Authentication authentication, Model model) {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        model.addAttribute("username", userDetails.getUsername());
+        model.addAttribute("username", userRepository.getUserDtoById(userDetails.getUsername()).getUserNm());
         return "staff/secured";
     }
 
@@ -96,7 +100,7 @@ public class MainController {
     public String securedRoles(Authentication authentication, Model model) {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        model.addAttribute("username", userDetails.getUsername());
+        model.addAttribute("username", userRepository.getUserDtoById(userDetails.getUsername()).getUserNm());
         return "staff/securedRoles";
     }
 

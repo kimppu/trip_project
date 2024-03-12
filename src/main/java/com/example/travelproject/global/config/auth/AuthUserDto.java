@@ -6,7 +6,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.example.travelproject.domain.user.model.UserEntity;
+import com.example.travelproject.domain.user.model.entity.UserEntity;
 
 import lombok.AllArgsConstructor;
 
@@ -34,12 +34,12 @@ public class AuthUserDto implements UserDetails {
 
     @Override
     public String getPassword() {
-        return userDto.getPwd();
+        return userDto.getUserPw();
     }
 
     @Override
     public String getUsername() {
-        return userDto.getName();
+        return userDto.getUserId();
     }
 
     @Override

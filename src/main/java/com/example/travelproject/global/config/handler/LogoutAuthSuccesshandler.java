@@ -26,9 +26,9 @@ public class LogoutAuthSuccesshandler implements LogoutSuccessHandler {
   public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
       throws IOException, ServletException {
     UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-    userService.updateIsLoginByName(userDetails.getUsername(), false);
+    userService.updateIsLoginById(userDetails.getUsername(), false);
 
-    response.sendRedirect("/loginPage");
+    response.sendRedirect("/index");
   }
   
 }
