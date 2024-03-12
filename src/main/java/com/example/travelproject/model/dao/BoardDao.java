@@ -29,9 +29,12 @@ public class BoardDao {
         return boardRepository.selectByNotice(noticeId);
     }
 
-    // public BoardEntity findByNotice(String title){
-    //     return boardRepository.findByTitle(title);
-    // }
+    // 게시글 목록 : show
+    public BoardEntity showNotice(){
+        return boardRepository.showNotice();
+    }
+
+    
 
 
 }
