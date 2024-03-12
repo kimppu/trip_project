@@ -107,16 +107,20 @@
 									<b><span style="font-size: 24pt;">탈퇴하기</span></b></span></p>
 							<p style="text-align: center; line-height: 1.5;"><br />정말 탈퇴하시겠습니까?</p>
 							<p><br /></p>
-							<div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop();">
+							<form id="myForm" action="/mypage/signout" method="post">
+								<div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop();">
 								<span class="pop_bt" style="font-size: 13pt;" >네</span>
+								<br>
+								<input type="hidden" id="userId" name="userId" value="{{userId}}>
+							</form>
 							<div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop();">
-							<span class="pop_bt" style="font-size: 13pt;" >아니오</span>
+							<span class="pop_bt" style="font-size: 13pt;">아니오</span>
 						</div>
 					</div>
 				</div>
 
 				<script type="text/javascript">
-					function open_pop() {
+					function open_pop(flag) {
 						$('#myModal').show();
 					};
 					//팝업 Close 기능

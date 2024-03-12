@@ -15,6 +15,28 @@
 
 
 ******************************/
+$(document).ready(function() {
+    mainMenu(); // 페이지가 로드된 후 mainMenu 함수를 호출
+	function mainMenu() {
+		var selectedMenu = localStorage.getItem('selectedMenu'); // 이전에 선택한 메뉴 항목 가져오기
+		if (selectedMenu) {
+			$(".main_nav_item").removeClass('active');
+			$(".main_nav_item:contains(" + selectedMenu + ")").addClass('active');
+			$(".main_nav_item_select").text(selectedMenu);
+		}
+	
+		// 메뉴 아이템이 클릭되었을 때의 이벤트 핸들러 설정
+		$('.main_nav_item').on('click', function() {
+			var clickedText = $(this).text();
+			$(".main_nav_item").removeClass('active');
+			$(this).addClass('active');
+			$(".main_nav_item_select").text(clickedText);
+			
+			// 선택한 메뉴 항목을 로컬 스토리지에 저장
+			localStorage.setItem('selectedMenu', clickedText);
+		});
+	}
+});
 
 $(document).ready(function()
 {
@@ -49,7 +71,7 @@ $(document).ready(function()
 	initCtaSlider();
 	initTestSlider();
 	initSearchForm();
-
+	// mainMenu();
 	/* 
 
 	2. Set Header
@@ -399,4 +421,6 @@ $(document).ready(function()
 			});	
 		}
 	}
+
+	
 });

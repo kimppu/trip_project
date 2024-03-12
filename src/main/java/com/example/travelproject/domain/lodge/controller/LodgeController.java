@@ -11,7 +11,6 @@ public class LodgeController {
 
     @GetMapping({"","/"})
     public String mainLodge(Model model){
-        model.addAttribute("menuTitle","숙박");
         return "lodge/lodgeMain";
     }
 }
