@@ -1,10 +1,12 @@
 package com.example.travelproject.model.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.travelproject.model.entity.UserEntity;
 import com.example.travelproject.model.repository.UserRepository;
 
+@Service
 public class UserDao {
     
     @Autowired
