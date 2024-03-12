@@ -1,6 +1,7 @@
 package com.example.travelproject.model.dao;
 
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 import com.example.travelproject.model.entity.BoardEntity;
 import com.example.travelproject.model.repository.BoardRepository;
@@ -30,11 +31,8 @@ public class BoardDao {
     }
 
     // 게시글 목록 : show
-    public BoardEntity showNotice(){
-        return boardRepository.showNotice();
+    public List<BoardEntity> showAllPage(){
+        return boardRepository.showAllPage();
     }
-
-    
-
 
 }

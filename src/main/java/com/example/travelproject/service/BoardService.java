@@ -1,4 +1,6 @@
 package com.example.travelproject.service;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +51,22 @@ public class BoardService {
         dto.setViewCnt(entity.getViewCnt());
         dto.setCreateDate(entity.getCreateDate());
         return dto;
+    }
+
+    public List<BoardDto> showAllPage(){
+        List<BoardEntity> entities = boradDao.showAllPage();
+        List<BoardDto> dtoList = new ArrayList<>();
+        for(BoardEntity boardEntity : entities){
+            BoardDto dto = new BoardDto(); 
+            dto.setNoticeId(boardEntity.getNoticeId());
+            dto.setUserId(boardEntity.getUserId());
+            dto.setTitle(boardEntity.getTitle());
+            dto.setContents(boardEntity.getContents());
+            dto.setViewCnt(boardEntity.getViewCnt());
+            dto.setCreateDate(boardEntity.getCreateDate());
+            dtoList.add(dto);
+        } 
+        return dtoList;   
     }
     
 }
