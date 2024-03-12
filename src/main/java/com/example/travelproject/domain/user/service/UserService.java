@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import com.example.travelproject.domain.user.model.entity.UserEntity;
 import com.example.travelproject.domain.user.model.repository.UserRepository;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class UserService {
 
@@ -43,6 +45,14 @@ public class UserService {
 
         // 신규 유저 database에 저장!!
         userRepository.save(dto);
+    }
+
+    public void updateUserDto(UserEntity dto) {
+        UserEntity entity = userRepository.getUserDtoById(dto.getUserId());
+        log.info("[UserService]: " + entity);
+        if (dto.getUserNm() != null) {
+            entity.setUserNm(dto.getUserNm());
+        }
     }
 
 }
