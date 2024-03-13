@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<h3>{{userId}}님의 비밀번호 변경</h3>
 <body>
-    <form action="/findPwd2" method="post">
+    <form action="/findPw2" method="post">
         <label for="pwd">* Password: </label>
         <input type="password" name="userPw" placeholder="비밀번호를 입력하세요." required> <small>최소 8글자</small>
         <br>
         <label for="pwd_equal"> Password 확인: </label>
         <input type="password" placeholder="비밀번호 확인">
         <br>
+        <input type="hidden" name="userId" id="userId" value="{{userId}}">
         <input type="submit" value="회원가입">
 </body>
 </html>

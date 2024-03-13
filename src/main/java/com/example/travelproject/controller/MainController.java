@@ -64,26 +64,31 @@ public class MainController {
         return "redirect:/loginPage";
     }
     
-    @PostMapping("/findPwd")
-    public String findPwd2(@ModelAttribute UserEntity entity) {
-        log.info("[find_pwd1]: " + entity);
-        log.info("[find_pwd2]: " + userRepository.getUserDtoById(entity.getUserId()));
+    @PostMapping("/findPw")
+    public String findPwd(@ModelAttribute UserEntity entity, Model model) {
+        log.info("[find_pw1]: " + entity);
+        log.info("[find_pw1-1]: " + userRepository.getUserDtoById(entity.getUserId()));
         if (userRepository.getUserDtoById(entity.getUserId()) == null) {
             log.info("가입된 아이디가 아닌 경우에...");
             return "/"; // 가입된 아이디가 아닙니다. 출력하는 방법?
         }
-        return "login/findPwd";
+        model.addAttribute("userId", entity.getUserId());
+        log.info("[find_pw1-2]: " + model);
+        return "login/findPw";
     }
     
-    @PostMapping("/findPwd2")
-    public String findPwd(@ModelAttribute UserEntity entity) {
-        log.info("[find_pwd1]: " + entity);
-        log.info("[find_pwd2]: " + userRepository.getUserDtoById(entity.getUserId()));
-        if (userRepository.getUserDtoById(entity.getUserId()) == null) {
-            log.info("가입된 아이디가 아닌 경우에...");
-            return "/"; // 가입된 아이디가 아닙니다. 출력하는 방법?
+    @PostMapping("/findPw2")
+    public String findPw2(@ModelAttribute UserEntity entity, Authentication authentication) {
+        log.info("[find_pw2]: " + entity);
+        log.info("[find_pw2-2]: " + userRepository.getUserDtoById(entity.getUserId()));
+
+        userService.updateUserDto(entity);
+        if (authentication != null) {
+            authentication.setAuthenticated(false);
+            log.info("[find_pw2-3][auth]: " + authentication);
         }
-        return "/";
+
+        return "redirect:/loginPage";
     }
 
     /*

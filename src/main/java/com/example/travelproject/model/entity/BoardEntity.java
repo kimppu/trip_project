@@ -30,17 +30,11 @@ public class BoardEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private long noticeId; 
 
-<<<<<<< HEAD
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user; //작성자
-=======
     // 작성자
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user; 
 
->>>>>>> e904f9c68548ae55d61206915510f98e09a35eca
     @Column(nullable = false)
     private String title; 
     private String contents;
