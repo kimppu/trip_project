@@ -14,6 +14,8 @@ import com.example.travelproject.model.dto.BoardDto;
 import com.example.travelproject.model.repository.BoardRepository;
 import com.example.travelproject.service.BoardService;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Controller
 @RequestMapping("/board")
 public class BoardController {
@@ -34,9 +36,13 @@ public class BoardController {
         return "board/NoticeForm";
     }
 
-    //작성된 게시글 저장
+    //작성된 게시글 저장(로그인이 되었을 때만 사용)
+    // /board/noticeform/create
     @PostMapping("/noticeform/create")
-    public String createNotice(@ModelAttribute Authentication authentication, Model model, BoardDto dto){
+    public String createNotice(Authentication authentication,@ModelAttribute BoardDto dto){
+        log.info("[noticeform]"+authentication.toString());
+        log.info("[noticeform]"+dto.toString());
+
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         dto.setUserId(userDetails.getUsername());
         boardService.saveNotice(dto); 
