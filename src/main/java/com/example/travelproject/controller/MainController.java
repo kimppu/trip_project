@@ -136,4 +136,14 @@ public class MainController {
         return "staff/securedRoles";
     }
 
+    @GetMapping("/admin/setting")
+    public String adminSetting(Authentication authentication, Model model) {
+        model.addAttribute("admin", authentication.getName());
+        model.addAttribute("userlist", userRepository.findAll());
+        log.info("[admin]: " + userRepository.findAll());
+        
+        return "staff/admin2";
+    }
+    
+
 }
