@@ -1,6 +1,9 @@
 package com.example.travelproject.model.entity;
 
 import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -35,6 +38,8 @@ public class UserEntity {
     @NotBlank
     private String userNm;
     private String userSex;
+    @CreationTimestamp
+    private java.sql.Timestamp createDate;
     @NotBlank
     @Pattern(regexp = "^01(?:0|1|[6-9])-?\\d{3,4}-?\\d{4}$", message = "올바른 전화번호를 입력해주세요.")
     private String userPhNmb;
@@ -44,6 +49,7 @@ public class UserEntity {
     @Column(columnDefinition = "tinyint(1) default 0")
     private Boolean isLogin;
 
+    
     @OneToMany(mappedBy = "user")
     private List<BoardEntity> boardList;
 }

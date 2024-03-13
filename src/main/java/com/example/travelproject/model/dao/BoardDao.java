@@ -1,11 +1,8 @@
 package com.example.travelproject.model.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import java.util.List;
 
 import com.example.travelproject.model.entity.BoardEntity;
-import com.example.travelproject.model.repository.BoardRepository;
 
 public interface BoardDao {
     

@@ -39,6 +39,7 @@ public class MypageController {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("userId", userDetails.getUsername());
+        model.addAttribute("userPw", userRepository.getUserDtoById(userDetails.getUsername()).getUserPw());
         model.addAttribute("userEmail", userRepository.getUserDtoById(userDetails.getUsername()).getUserEmail());
 		return "staff/mypage";
 	}
@@ -54,13 +55,7 @@ public class MypageController {
 
         return "redirect:/mypage";
     }
-
-    // @PostMapping("/update/pw")
-    // public String updatePw(@ModelAttribute UserDto dto){
-
-    // }
-
-
+    
     @GetMapping("/signout")
     public String signout(Authentication authentication) {
         log.info("[signout]: " + authentication);
