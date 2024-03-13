@@ -18,16 +18,11 @@ public class BoardService {
     // 글 작성 : insert
     public void saveNotice(BoardDto dto){
         BoardEntity entity = new BoardEntity(); 
-        entity.setNoticeId(dto.getNoticeId());
         entity.setUserId(dto.getUserId());
         entity.setTitle(dto.getTitle());
-        entity.setContents(dto.getContents());
-        entity.setViewCnt(dto.getViewCnt());
-        entity.setCreateDate(dto.getCreateDate());
-        
+        entity.setContents(dto.getContents());       
         boradDao.saveNotice(entity);
     }
-
 
     // // 글 수정 : update
     public void updateNotice(BoardDto dto){
@@ -41,6 +36,7 @@ public class BoardService {
         boradDao.deleteNotice(entity.getNoticeId());
     }
 
+    // 글 조회(하나만)
     public BoardDto findtByNoticeId(long noticeId){
         BoardEntity entity = boradDao.findByNoticeId(noticeId);
         BoardDto dto = new BoardDto(); 
@@ -53,6 +49,7 @@ public class BoardService {
         return dto;
     }
 
+    //글 전체 리스트 
     public List<BoardDto> showAllPage(){
         List<BoardEntity> entities = boradDao.showAllPage();
         List<BoardDto> dtoList = new ArrayList<>();
@@ -67,6 +64,10 @@ public class BoardService {
             dtoList.add(dto);
         } 
         return dtoList;   
+
+        // 조회수 증가 
+
+        
     }
     
 }
