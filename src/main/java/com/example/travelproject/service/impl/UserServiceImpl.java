@@ -1,22 +1,41 @@
-package com.example.travelproject.service;
+package com.example.travelproject.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.travelproject.model.dao.UserDao;
+import com.example.travelproject.model.dto.UserDto;
 import com.example.travelproject.model.entity.UserEntity;
 import com.example.travelproject.model.repository.UserRepository;
+import com.example.travelproject.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+@Service
+public class UserServiceImpl implements UserService{
+    
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    
+    @Autowired
+    private UserRepository userRepository;
 
-public interface UserService {
+    @Autowired
+    private UserDao userDao;
 
-    public void deleteUser(String userId);
+    public void deleteUser(String userId) {
+        UserEntity entity = userDao.findByUserId(userId);
+        userDao.deleteUser(entity.getUserId());
+    }
 
     // 로그인 성공시 >> 로그인 유무 저장
-    public void updateIsLoginById(String id, Boolean isLogin);
+    public void updateIsLoginById(String id, Boolean isLogin) {
+        UserEntity dto = userRepository.getUserDtoById(id);
+        dto.setIsLogin(isLogin);
+        userRepository.save(dto);
+    }
 
     public void joinUserDto(UserEntity dto) {
         
@@ -40,22 +59,19 @@ public interface UserService {
     }
 
     public void updateUserDto(UserEntity dto) {
-        log.info("[UserService][dto]: " + dto);
         UserEntity entity = userRepository.getUserDtoById(dto.getUserId());
-        log.info("[UserService][entity]: " + entity);
-        
+        log.info("[UserService]: " + entity);
         if (dto.getUserNm() != null) {
             entity.setUserNm(dto.getUserNm());
         }
-        if (dto.getUserPw() != null) {
-            // 비밀번호 암호화 적용
-            String rawPwd = dto.getUserPw();
-            String encodedPwd = bCryptPasswordEncoder.encode(rawPwd);
-            entity.setUserPw(encodedPwd);
+    }
+
+    public void updatePw(UserDto dto){
+        UserEntity entity = userRepository.getUserDtoById(dto.getUserId());
+        log.info("[UserService][updatePw] Start");
+        if(dto.getUserNm()!= null){
+            entity.setUserNm(dto.getUserNm());
         }
-        log.info("[UserService]: " + entity);
-        userRepository.save(entity);
-        
     }
 
 }

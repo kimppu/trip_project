@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="/board/notice/save" method="post">
+    <p>
+        제목<input type="text" name="title" value="{{#notice}}{{title}}{{/notice}}" mustarch="true"/>
+       
+    </p>
+    <!-- <p>
+        비밀번호<input type="password" name="noticePw"/>
+    </p> -->
+
+    <p>
+        내용<textarea rows="3" name="contents">{{#notice}}{{contents}}{{/notice}}</textarea><br>
+    </p>
+    <button type="submit">
+        {{#notice}}
+            수정
+        {{/notice}}
+        {{^notice}}
+            작성
+        {{/notice}}    
+    </button>
+    
+    
+
+    </form>
+</body>
+</html>

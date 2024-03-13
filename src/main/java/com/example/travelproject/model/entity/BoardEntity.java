@@ -1,5 +1,6 @@
 package com.example.travelproject.model.entity;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
@@ -38,7 +39,8 @@ public class BoardEntity {
     @Column(nullable = false)
     private String title; 
     private String contents;
-    private String noticePw;
+    // private String noticePw;
+    @ColumnDefault("0")
     private int viewCnt;
     @CreationTimestamp
     private java.sql.Timestamp createDate;
