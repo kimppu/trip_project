@@ -6,20 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.travelproject.model.dao.BoardDao;
+import com.example.travelproject.model.dao.UserDao;
 import com.example.travelproject.model.dto.BoardDto;
 import com.example.travelproject.model.entity.BoardEntity;
+import com.example.travelproject.model.entity.UserEntity;
 
 @Service
 public class BoardService {
 
     @Autowired
     private BoardDao boradDao; 
+    @Autowired
+    private UserDao userDao;
 
     // 글 작성 : insert
     public void saveNotice(BoardDto dto){
         BoardEntity entity = new BoardEntity(); 
+        UserEntity userEntity = userDao.findByUserId(dto.getUserId());
         entity.setNoticeId(dto.getNoticeId());
-        entity.setUserId(dto.getUserId());
+        entity.setUser(userEntity);
         entity.setTitle(dto.getTitle());
         entity.setContents(dto.getContents());
         entity.setViewCnt(dto.getViewCnt());
@@ -45,7 +50,7 @@ public class BoardService {
         BoardEntity entity = boradDao.findByNoticeId(noticeId);
         BoardDto dto = new BoardDto(); 
         dto.setNoticeId(noticeId);
-        dto.setUserId(entity.getUserId());
+        dto.setUserId(entity.getUser().getUserId());
         dto.setTitle(entity.getTitle());
         dto.setContents(entity.getContents());
         dto.setViewCnt(entity.getViewCnt());
@@ -59,7 +64,7 @@ public class BoardService {
         for(BoardEntity boardEntity : entities){
             BoardDto dto = new BoardDto(); 
             dto.setNoticeId(boardEntity.getNoticeId());
-            dto.setUserId(boardEntity.getUserId());
+            dto.setUserId(boardEntity.getUser().getUserId());
             dto.setTitle(boardEntity.getTitle());
             dto.setContents(boardEntity.getContents());
             dto.setViewCnt(boardEntity.getViewCnt());
