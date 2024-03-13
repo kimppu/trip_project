@@ -55,6 +55,12 @@ public class MypageController {
         return "redirect:/mypage";
     }
 
+    // @PostMapping("/update/pw")
+    // public String updatePw(@ModelAttribute UserDto dto){
+
+    // }
+
+
     @GetMapping("/signout")
     public String signout(Authentication authentication) {
         log.info("[signout]: " + authentication);

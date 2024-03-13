@@ -1,0 +1,34 @@
+{{>common/header}}
+<title>게시판</title>
+<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="row">
+        <div class="col">
+            <h2> 제목 : {{notice.title}}</h2>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-7">
+            <p>작성자 : {{notice.userId}}</p>
+        </div>
+        <div class="col-3">
+            <p>작성일자 :  {{notice.createDate}}</p>
+        </div>
+        <div class="col-2">
+            <p> 조회수 : {{notice.viewCnt}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex flex-lg-row justify-content-center">
+            <textarea readonly="true">{{notice.contents}}</textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-end">
+            <button>수정</button>
+        </div>
+    </div>
+</body>
+</html
