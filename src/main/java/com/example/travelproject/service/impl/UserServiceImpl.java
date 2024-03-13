@@ -60,10 +60,19 @@ public class UserServiceImpl implements UserService{
 
     public void updateUserDto(UserEntity dto) {
         UserEntity entity = userRepository.getUserDtoById(dto.getUserId());
-        log.info("[UserService]: " + entity);
+        log.info("[UserService][entity]: " + entity);
+        
         if (dto.getUserNm() != null) {
             entity.setUserNm(dto.getUserNm());
         }
+        if (dto.getUserPw() != null) {
+            // 비밀번호 암호화 적용
+            String rawPwd = dto.getUserPw();
+            String encodedPwd = bCryptPasswordEncoder.encode(rawPwd);
+            entity.setUserPw(encodedPwd);
+        }
+        log.info("[UserService]: " + entity);
+        userRepository.save(entity);
     }
 
     public void updatePw(UserDto dto){
