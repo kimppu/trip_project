@@ -13,7 +13,32 @@
 <link rel="stylesheet" type="text/css" href="/static/plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="/static/css/main_styles.css">
 <link rel="stylesheet" type="text/css" href="/static/css/responsive.css">
-</head>
+</head><script src="http://code.jquery.com/jquery-latest.js"></script>
+<style>
+	/* The Modal (background) */
+	.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 1; /* Sit on top */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	}
+
+	/* Modal Content/Box */
+	.modal-content {
+		background-color: #fefefe;
+		margin: 15% auto; /* 15% from the top and centered */
+		padding: 20px;
+		border: 1px solid #888;
+		width: 30%; /* Could be more or less, depending on screen size */                          
+	}
+</style>
+
 <body>
     <div class="menu_content d-flex flex-column align-items-center justify-content-center text-center">
         <div class="menu_close_container"><div class="menu_close"></div></div>
@@ -45,7 +70,39 @@
         </script>
         <a href="/joinPage">신규 가입</a>
         <a href="#">아이디 찾기</a>
-        <a href="#">새로운 비밀번호 생성</a>
+
+        <a href="#">비밀번호 찾기</a>
+
+        <a>
+            <button class="btn" onclick="open_pop();">비밀번호 찾기</button>
+        </a>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                    <p style="text-align: center;">
+                        <span style="font-size: 14pt;">
+                            <b><span style="font-size: 15pt;">아이디를 입력하세요.</span></b></span></p>
+                    <form name="loginForm" action="/findPw" method="post">
+                        <input type="text" id="userId" name="userId" placeholder="아이디를 입력하세요.">
+                        <br>
+                        <input type="submit" value="조회하기">
+                    </form>
+                                <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop();">
+                    <span class="pop_bt" style="font-size: 13pt;">닫기</span>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            function open_pop(flag) {
+                $('#myModal').show();
+            };
+            //팝업 Close 기능
+            function close_pop(flag) {
+                $('#myModal').hide();
+            };
+        </script>
+
         <a href="/index">홈으로 이동</a>
     
     </div>

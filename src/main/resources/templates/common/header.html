@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Web Page</title>
+<title>Travle</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Travelix Project">
@@ -31,17 +31,29 @@
 					<div class="col d-flex flex-row">
 						<div class="user_box ml-auto my-auto">
 							<div class="user_box_link">
-								{{#userNm}}
+								{{#username}}
 								<a class="user_info btn btn-link p-1" role="button" href="#">
 									<i class="fas fa-circle-user"></i>
-									<span>재전</span>
+									<span>{{username}}님 반갑습니다.</span>
+									<a class="user_logout btn btn-light my-1 px-1 py-0" role="button" href="/logout" style="font-size:15px;" >
+										로그아웃
+									</a>
+									<a class="user_mypage btn btn-light my-1 px-1 py-0" role="button" href="/mypage" style="font-size:15px;" >
+										마이페이지
+									</a>	
+									{{#admin}}
+										<a class="user_mypage btn btn-light my-1 px-1 py-0" role="button" href="/admin/setting" style="font-size:15px;" >
+											관리자 페이지
+										</a>	
+									</a>
+									{{/admin}}
 								</a>
-								{{/userNm}}
-								{{^userId}}
+								{{/username}}
+								{{^username}}
 								<a class="user_join btn btn-light my-1 px-1 py-0" role="button" href="/loginPage" style="font-size:15px;" >
 									로그인 / 회원가입
 								</a>
-								{{/userId}}
+								{{/username}}
 							</div> 
 						</div>
 					</div>

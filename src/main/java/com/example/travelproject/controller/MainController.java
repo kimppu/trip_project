@@ -16,7 +16,10 @@ import com.example.travelproject.model.entity.UserEntity;
 import com.example.travelproject.model.repository.UserRepository;
 import com.example.travelproject.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
 
+
+@Slf4j
 @Controller
 public class MainController {
     
@@ -31,11 +34,15 @@ public class MainController {
      */
     @GetMapping({"/index","/"})
     public String index(Authentication authentication, Model model) {
-        if(authentication != null) {
-            model.addAttribute("menuTitle", "홈");
-            return "staff/user";
+        if (authentication == null || userRepository.getUserDtoById(authentication.getName()) == null) {
+            return "index";
         }
-        return "index";
+        if (authentication.getName().equals("admin")) {
+            return "admin/index";
+        } else {
+            log.info("[user]: " + authentication);
+            return "user/index";
+        }
     }
 
     @GetMapping("/loginPage")
@@ -52,11 +59,38 @@ public class MainController {
 
     @PostMapping("/join")
     public String join(@ModelAttribute UserEntity dto) {
-
+        
         userService.joinUserDto(dto);
         return "redirect:/loginPage";
     }
     
+    @PostMapping("/findPw")
+    public String findPwd(@ModelAttribute UserEntity entity, Model model) {
+        log.info("[find_pw1]: " + entity);
+        log.info("[find_pw1-1]: " + userRepository.getUserDtoById(entity.getUserId()));
+        if (userRepository.getUserDtoById(entity.getUserId()) == null) {
+            log.info("가입된 아이디가 아닌 경우에...");
+            return "/"; // 가입된 아이디가 아닙니다. 출력하는 방법?
+        }
+        model.addAttribute("userId", entity.getUserId());
+        log.info("[find_pw1-2]: " + model);
+        return "login/findPw";
+    }
+    
+    @PostMapping("/findPw2")
+    public String findPw2(@ModelAttribute UserEntity entity, Authentication authentication) {
+        log.info("[find_pw2]: " + entity);
+        log.info("[find_pw2-2]: " + userRepository.getUserDtoById(entity.getUserId()));
+
+        userService.updateUserDto(entity);
+        if (authentication != null) {
+            authentication.setAuthenticated(false);
+            log.info("[find_pw2-3][auth]: " + authentication);
+        }
+
+        return "redirect:/loginPage";
+    }
+
     /*
      * 로그인한 경우만 
      */
@@ -65,7 +99,6 @@ public class MainController {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("username", userRepository.getUserDtoById(userDetails.getUsername()).getUserNm());
-        model.addAttribute("menuTitle", "홈");
         return "staff/user";
     }
 
@@ -79,9 +112,9 @@ public class MainController {
 
     @GetMapping("/admin/index")
     public String admin(Authentication authentication, Model model) {
-
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("username", userRepository.getUserDtoById(userDetails.getUsername()).getUserNm());
+        model.addAttribute("admin", userRepository.getUserDtoById(userDetails.getUsername()).getUserNm());
         return "staff/admin1";
     }
 
@@ -102,5 +135,15 @@ public class MainController {
         model.addAttribute("username", userRepository.getUserDtoById(userDetails.getUsername()).getUserNm());
         return "staff/securedRoles";
     }
+
+    @GetMapping("/admin/setting")
+    public String adminSetting(Authentication authentication, Model model) {
+        model.addAttribute("admin", authentication.getName());
+        model.addAttribute("userlist", userRepository.findAll());
+        log.info("[admin]: " + userRepository.findAll());
+        
+        return "staff/admin2";
+    }
+    
 
 }

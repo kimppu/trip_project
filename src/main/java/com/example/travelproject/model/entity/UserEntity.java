@@ -1,8 +1,13 @@
 package com.example.travelproject.model.entity;
 
+import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -33,12 +38,18 @@ public class UserEntity {
     @NotBlank
     private String userNm;
     private String userSex;
+    @CreationTimestamp
+    private java.sql.Timestamp createDate;
     @NotBlank
-    @Pattern(regexp = "^01(?:0|1|[6-9])-?\\d{3,4}-?\\d{4}$", message = "올바른 전화번로를 입력해주세요.")
+    @Pattern(regexp = "^01(?:0|1|[6-9])-?\\d{3,4}-?\\d{4}$", message = "올바른 전화번호를 입력해주세요.")
     private String userPhNmb;
     // 일반사용자 / 관리자를 구분용
     private String role;
     // 로그인 유무
     @Column(columnDefinition = "tinyint(1) default 0")
     private Boolean isLogin;
+
+    
+    @OneToMany(mappedBy = "user")
+    private List<BoardEntity> boardList;
 }

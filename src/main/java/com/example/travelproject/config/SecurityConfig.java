@@ -22,7 +22,7 @@ public class SecurityConfig {
     
     // 비밀번호 암호화에서 사용할 객체
     @Bean
-    public BCryptPasswordEncoder eCryptPasswordEncoder() {
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
