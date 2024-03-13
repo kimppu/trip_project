@@ -45,12 +45,11 @@
         <h1>Login Page</h1>
         <!-- <p>로그인한 사용자들만 접속이 가능합니다.</p> -->
         <form name="loginForm" action="/login" method="post">
-            <input type="text" id="username" name="username" placeholder="아이디를 입력하세요.">
+            <input type="text" id="username" name="username" placeholder="아이디를 입력하세요." required>
             <br>
-            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요.">
+            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요." required>
             <br>
             <input type="submit" value="로그인">
-            <button class="btn" id="login" type="button" onclick="loginCheck()">로그인(알람)</button>
         </form>
         <script>
             // 아이디 비밀번호 입력 안 한 경우
@@ -70,8 +69,6 @@
         </script>
         <a href="/joinPage">신규 가입</a>
         <a href="#">아이디 찾기</a>
-
-        <a href="#">비밀번호 찾기</a>
 
         <a>
             <button class="btn" onclick="open_pop();">비밀번호 찾기</button>
