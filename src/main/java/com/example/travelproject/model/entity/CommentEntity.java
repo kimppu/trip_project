@@ -1,9 +1,7 @@
 package com.example.travelproject.model.entity;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import java.util.List;
-import jakarta.persistence.CascadeType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,32 +18,28 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
-@Entity(name = "BoardEntity")
-@Table(name = "board")
-public class BoardEntity {
+@Entity(name = "CommentEntity")
+@Table(name = "comment")
+public class CommentEntity {
 
-    // private UserEntity userEntity; 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)    
-    private long noticeId; 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long commentId;
+    
+    @ManyToOne
+    @JoinColumn(name = "notice_id")
+    private BoardEntity notice; // 게시판 엔티티에 대한 참조
 
-    // 작성자
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserEntity user; 
+    private UserEntity user; // 사용자 엔티티에 대한 참조
 
     @Column(nullable = false)
-    private String title; 
     private String contents;
-    // private String noticePw;
-    @ColumnDefault("0")
-    private int viewCnt;
+
     @CreationTimestamp
     private java.sql.Timestamp createDate;
-
-    @OneToMany(mappedBy = "notice",cascade = CascadeType.REMOVE)
-    private List<CommentEntity> commentList;
 }
