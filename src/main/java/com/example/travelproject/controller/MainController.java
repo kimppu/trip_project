@@ -18,6 +18,7 @@ import com.example.travelproject.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
+
 @Slf4j
 @Controller
 public class MainController {
@@ -63,6 +64,28 @@ public class MainController {
         return "redirect:/loginPage";
     }
     
+    @PostMapping("/findPwd")
+    public String findPwd2(@ModelAttribute UserEntity entity) {
+        log.info("[find_pwd1]: " + entity);
+        log.info("[find_pwd2]: " + userRepository.getUserDtoById(entity.getUserId()));
+        if (userRepository.getUserDtoById(entity.getUserId()) == null) {
+            log.info("가입된 아이디가 아닌 경우에...");
+            return "/"; // 가입된 아이디가 아닙니다. 출력하는 방법?
+        }
+        return "login/findPwd";
+    }
+    
+    @PostMapping("/findPwd2")
+    public String findPwd(@ModelAttribute UserEntity entity) {
+        log.info("[find_pwd1]: " + entity);
+        log.info("[find_pwd2]: " + userRepository.getUserDtoById(entity.getUserId()));
+        if (userRepository.getUserDtoById(entity.getUserId()) == null) {
+            log.info("가입된 아이디가 아닌 경우에...");
+            return "/"; // 가입된 아이디가 아닙니다. 출력하는 방법?
+        }
+        return "/";
+    }
+
     /*
      * 로그인한 경우만 
      */

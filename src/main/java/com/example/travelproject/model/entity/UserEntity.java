@@ -1,8 +1,11 @@
 package com.example.travelproject.model.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -41,4 +44,7 @@ public class UserEntity {
     // 로그인 유무
     @Column(columnDefinition = "tinyint(1) default 0")
     private Boolean isLogin;
+
+    @OneToMany(mappedBy = "user")
+    private List<BoardEntity> boardList;
 }
