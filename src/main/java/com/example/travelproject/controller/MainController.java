@@ -59,7 +59,7 @@ public class MainController {
 
     @PostMapping("/join")
     public String join(@ModelAttribute UserEntity dto) {
-
+        
         userService.joinUserDto(dto);
         return "redirect:/loginPage";
     }
