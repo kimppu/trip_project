@@ -1,34 +1,106 @@
 {{>common/header}}
 <title>게 시 판</title>
-<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css"> -->
 </head>
+<style>
+	
+	.notice_panel{
+		/* display: none !important; */
+		width: 100%;
+		height: 100%;
+		-webkit-animation: fadeEffect 1s;
+		animation: fadeEffect 1s;
+	}
+	.notice_title{
+		font-weight: 700;
+		color: #2d2c2c;
+		margin-top: 60px;
+		margin-bottom: 30px;
+	}
+	.notice_head{
+		font-size: 24px;
+		color: #929191;
+		line-height: 1.336;
+		margin-bottom: 0px;
+		align-items: center;
+		border-bottom: 1px solid;
+	}
+	.notice_btn a{
+		position: relative;
+		display: block;
+		font-size: 13px;
+		font-weight: 700;
+		color: #fff;
+		text-transform: uppercase;
+		line-height: 40px;
+		padding-left: 46px;
+		padding-right: 46px;
+		white-space: nowrap;
+		z-index: 2;
+	}
+	.notice_btn a:hover{
+		color: #a131e1;
+	}
+</style>
 <body>
 
-<div id="bbsList">
-
-	<div id="bbsList_title">
-		게 시 판
+<div class="noticeList">
+	<div class="container">
+		<div class="notice_panel">
+			<div class="row">
+				<div class="col">
+					<h2 class="notice_title text-center">공지사항</h2>
+				</div>
+			</div>
+			<div class="row notice_head">
+				<div class="col-1 align-items-center">
+					<p>번호</p>
+				</div>
+				<div class="col-5 align-items-center">
+					<p>제목</p>
+				</div>
+				<div class="col-2 align-items-center">
+					<p>작성자</p>
+				</div>	
+				<div class="col-3 align-items-center">
+					<p>작성 일자</p>
+				</div>	
+				<div class="col-1 align-items-center">
+					<p>조회수</p>
+				</div>
+			</div>
+			{{#boardList}}
+			<div class="row my-0">
+				<div class="col-1 d-flex py-0">
+					<p>{{noticeId}}</p>
+				</div>
+				<div class="col-5 d-flex py-0">
+					<a href="/board/notice/{{noticeId}}"><p>{{title}}</p></a>
+				</div>
+				<div class="col-2 d-flex py-0">
+					<p>{{userId}}</p>
+				</div>	
+				<div class="col-3 d-flex py-0">
+					<p>{{createDate}}</p>
+				</div>
+				<div class="col-1 d-flex py-0">
+					<p class="text-end">{{viewCnt}}</p>
+				</div>	
+			</div>
+			<hr>
+			{{/boardList}}
+			<div class="notice_btn">
+				<a class="btn btn-light my-1 px-1 py-0" role="button" href="/board/notice" style="font-size:15px;" >
+					새글 등록
+				</a>
+			</div>
+		</div>
 	</div>
-	{{#boardList}}
-	<div class="row">
-		<div class="col-1">
-			<p style="text-align:center">{{noticeId}}</p>
-		</div>
-		<div class="col-5">
-			<a href="/board/notice/{{noticeId}}"><h3>{{title}}</h3></a>
-		</div>
-		<div class="col-1">
-			<h4>{{userId}}</h4>
-		</div>	
-		<div class="col-3">
-			<p>{{createDate}}</p>
-		</div>	
-		<div class="col-2">
-		</div>
-	</div>
-	<hr>
-	{{/boardList}}
-	<button type="button" onclick="location.href='/board/notice'">새글 등록</button>
+</div>
+</body>
+<script src="/static/js/bootstrap.min.js"></script>
+{{>common/footer}}	
+	
 	
 	<!-- <div id="bbsList_header">
 		<div id="leftHeader">
@@ -46,8 +118,3 @@
 			<input type="button" value=" 글올리기 " class="btn2" 
 			onclick="javascript:location.href='<%=cp%>/board/created.jsp';"/>			
 		</div>	 -->
-	</div>
-</div>
-</body>
-<script src="/static/js/bootstrap.min.js"></script>
-{{>common/footer}}
