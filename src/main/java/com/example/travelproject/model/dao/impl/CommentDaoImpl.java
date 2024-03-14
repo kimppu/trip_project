@@ -1,13 +1,14 @@
 package com.example.travelproject.model.dao.impl;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.example.travelproject.model.dao.CommentDao;
 import com.example.travelproject.model.entity.CommentEntity;
 import com.example.travelproject.model.repository.CommentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Component;
-import java.util.List;
-import java.util.Optional;
 
 @Component
 public class CommentDaoImpl implements CommentDao {

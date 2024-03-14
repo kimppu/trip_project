@@ -32,7 +32,7 @@ public class BoardDaoImpl implements BoardDao{
     }
 
     // 게시글 선택 : select
-    public BoardEntity findByNoticeId(long noticeId){
+    public  BoardEntity findByNoticeId(long noticeId){
         return boardRepository.findByNoticeId(noticeId);
     }
 
@@ -40,4 +40,13 @@ public class BoardDaoImpl implements BoardDao{
     public List<BoardEntity> findNoticeList(){
         return boardRepository.findAll(Sort.by(Sort.Direction.DESC, "createDate"));
     }
+
+
+    // 게시글 조회수 업데이트 
+    public BoardEntity updateViewCnt(long noticeId) {
+        BoardEntity entity = boardRepository.updateViewCnt(noticeId);
+        return boardRepository.save(entity); 
+    }
+
+    
 }

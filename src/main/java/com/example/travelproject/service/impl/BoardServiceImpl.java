@@ -1,7 +1,8 @@
 package com.example.travelproject.service.impl;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,10 @@ import com.example.travelproject.service.BoardService;
 @Service
 public class BoardServiceImpl implements BoardService{
     @Autowired
-    private BoardDao boradDao; 
+    private BoardDao boardDao; 
     @Autowired
     private UserDao userDao;
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     // bCryptPasswordEncoder.encode(rawPwd);
@@ -26,6 +28,8 @@ public class BoardServiceImpl implements BoardService{
     public String encodingPassword(String pw){
         return bCryptPasswordEncoder.encode(pw);
     }
+
+
     // 글 작성 : insert
     public void saveNotice(BoardDto dto){
         BoardEntity entity = new BoardEntity(); 
@@ -33,24 +37,25 @@ public class BoardServiceImpl implements BoardService{
         entity.setUser(userEntity);
         entity.setTitle(dto.getTitle());
         entity.setContents(dto.getContents());
-        boradDao.saveNotice(entity);
+        boardDao.saveNotice(entity);
     }
 
 
-    // // 글 수정 : update
+    // 글 수정 : update
     public void updateNotice(BoardDto dto){
-        BoardEntity entity = boradDao.findByNoticeId(dto.getNoticeId());
-        boradDao.updateNotice(entity);
+        BoardEntity entity = boardDao.findByNoticeId(dto.getNoticeId());
+        boardDao.updateNotice(entity);
     }
 
     // 글 삭제 : delete
     public void deleteNotice(long noticeId){
-        BoardEntity entity = boradDao.findByNoticeId(noticeId);
-        boradDao.deleteNotice(entity.getNoticeId());
+        BoardEntity entity = boardDao.findByNoticeId(noticeId);
+        boardDao.deleteNotice(entity.getNoticeId());
     }
 
+    // 글 찾기(1개)
     public BoardDto findtByNoticeId(long noticeId){
-        BoardEntity entity = boradDao.findByNoticeId(noticeId);
+        BoardEntity entity = boardDao.findByNoticeId(noticeId);
         BoardDto dto = new BoardDto(); 
         dto.setNoticeId(noticeId);
         dto.setUserId(entity.getUser().getUserId());
@@ -61,8 +66,9 @@ public class BoardServiceImpl implements BoardService{
         return dto;
     }
 
+    // 글 리스트
     public List<BoardDto> findNoticeList(){
-        List<BoardEntity> entities = boradDao.findNoticeList();
+        List<BoardEntity> entities = boardDao.findNoticeList();
         List<BoardDto> dtoList = new ArrayList<>();
         for(BoardEntity boardEntity : entities){
             BoardDto dto = new BoardDto(); 
@@ -76,4 +82,12 @@ public class BoardServiceImpl implements BoardService{
         } 
         return dtoList;   
     }
+
+
+    //조회수 증가
+    public void updateViewCnt(long noticeId) {
+        BoardEntity entity = boardDao.findByNoticeId(noticeId);
+        boardDao.updateViewCnt(entity.getNoticeId());
+    }
+    
 }

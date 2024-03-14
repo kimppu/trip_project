@@ -16,4 +16,6 @@ public interface BoardDao {
     public BoardEntity findByNoticeId(long noticeId);
     // 게시글 목록 : show
     public List<BoardEntity> findNoticeList();
+    // 조회수 업데이트
+    public BoardEntity updateViewCnt(long noticeId); 
 }
