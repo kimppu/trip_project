@@ -15,6 +15,8 @@ public interface BoardService {
     public BoardDto findtByNoticeId(long noticeId);
     //글 리스트 
     public List<BoardDto> findNoticeList();
+    //검색 결과 리스트 
+    public List<BoardDto> findSearchList(String keyword); 
     //조회수 증가
     public void updateViewCnt(long noticeId); 
 }

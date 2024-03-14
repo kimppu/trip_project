@@ -20,7 +20,6 @@ public class BoardServiceImpl implements BoardService{
     private BoardDao boardDao; 
     @Autowired
     private UserDao userDao;
-
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     // bCryptPasswordEncoder.encode(rawPwd);
@@ -53,7 +52,7 @@ public class BoardServiceImpl implements BoardService{
         boardDao.deleteNotice(entity.getNoticeId());
     }
 
-    // 글 찾기(1개)
+    // 글 선택
     public BoardDto findtByNoticeId(long noticeId){
         BoardEntity entity = boardDao.findByNoticeId(noticeId);
         BoardDto dto = new BoardDto(); 
@@ -66,7 +65,7 @@ public class BoardServiceImpl implements BoardService{
         return dto;
     }
 
-    // 글 리스트
+    // 글 전체 리스트
     public List<BoardDto> findNoticeList(){
         List<BoardEntity> entities = boardDao.findNoticeList();
         List<BoardDto> dtoList = new ArrayList<>();
@@ -83,8 +82,24 @@ public class BoardServiceImpl implements BoardService{
         return dtoList;   
     }
 
-
-    //조회수 증가
+    // 검색 결과 리스트 
+    public List<BoardDto> findSearchList(String keyword){
+        List<BoardEntity> entities = boardDao.findByTitleContaining(keyword); 
+        List<BoardDto> dtoSearchList = new ArrayList<>(); 
+        for(BoardEntity boardEntity:entities){
+            BoardDto dto = new BoardDto(); 
+            dto.setNoticeId(boardEntity.getNoticeId());
+            dto.setUserId(boardEntity.getUser().getUserId());
+            dto.setTitle(boardEntity.getTitle());
+            dto.setContents(boardEntity.getContents());
+            dto.setViewCnt(boardEntity.getViewCnt());
+            dto.setCreateDate(boardEntity.getCreateDate());
+            dtoSearchList.add(dto); 
+        }
+        return dtoSearchList; 
+    }
+    
+    // 조회수 증가
     public void updateViewCnt(long noticeId) {
         BoardEntity entity = boardDao.findByNoticeId(noticeId);
         boardDao.updateViewCnt(entity.getNoticeId());
