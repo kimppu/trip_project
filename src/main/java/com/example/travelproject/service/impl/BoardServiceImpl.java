@@ -1,11 +1,15 @@
 package com.example.travelproject.service.impl;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.travelproject.config.base.DateUtil;
 import com.example.travelproject.model.dao.BoardDao;
 import com.example.travelproject.model.dao.UserDao;
 import com.example.travelproject.model.dto.BoardDto;
@@ -57,7 +61,7 @@ public class BoardServiceImpl implements BoardService{
         dto.setTitle(entity.getTitle());
         dto.setContents(entity.getContents());
         dto.setViewCnt(entity.getViewCnt());
-        dto.setCreateDate(entity.getCreateDate());
+        dto.setCreateDate(localtimeToString(entity.getCreateDate()));
         return dto;
     }
 
@@ -71,9 +75,13 @@ public class BoardServiceImpl implements BoardService{
             dto.setTitle(boardEntity.getTitle());
             dto.setContents(boardEntity.getContents());
             dto.setViewCnt(boardEntity.getViewCnt());
-            dto.setCreateDate(boardEntity.getCreateDate());
+            dto.setCreateDate(localtimeToString(boardEntity.getCreateDate()));
             dtoList.add(dto);
         } 
         return dtoList;   
+    }
+
+    public String localtimeToString(LocalDateTime localDateTime){
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(localDateTime);
     }
 }

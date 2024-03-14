@@ -2,6 +2,9 @@ package com.example.travelproject.model.entity;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.example.travelproject.config.base.BaseEntity;
+
 import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -26,7 +29,7 @@ import lombok.ToString;
 @ToString
 @Entity(name = "BoardEntity")
 @Table(name = "board")
-public class BoardEntity {
+public class BoardEntity extends BaseEntity{
 
     // private UserEntity userEntity; 
     @Id
@@ -41,12 +44,10 @@ public class BoardEntity {
     @Column(nullable = false)
     private String title; 
     private String contents;
-    // private String noticePw;
+
     @ColumnDefault("0")
     private int viewCnt;
-    @CreationTimestamp
-    private java.sql.Timestamp createDate;
 
-    @OneToMany(mappedBy = "notice",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "notice",cascade = CascadeType.ALL)
     private List<CommentEntity> commentList;
 }
