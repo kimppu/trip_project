@@ -6,6 +6,9 @@ import com.example.travelproject.model.entity.CommentEntity;
 import com.example.travelproject.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -54,13 +57,16 @@ public class CommentServiceImpl implements CommentService {
                 entity.getNotice().toString(), // 예시입니다. 실제 구현은 조정이 필요합니다.
                 entity.getUser().toString(), // 예시입니다.
                 entity.getContents(),
-                entity.getCreateDate()
+                localtimeToString(entity.getCreateDate())
             );
         } else {
             throw new RuntimeException("Comment not found with id " + id);
         }
     }
 
+    public String localtimeToString(LocalDateTime localDateTime){
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(localDateTime);
+    }
     @Override
     public List<CommentDto> findAllComments() {
         return commentDao.findAllComments().stream().map(entity -> new CommentDto(
@@ -69,7 +75,7 @@ public class CommentServiceImpl implements CommentService {
             entity.getNotice().toString(), // 예시입니다.
             entity.getUser().toString(), // 예시입니다.
             entity.getContents(),
-            entity.getCreateDate()
+            localtimeToString(entity.getCreateDate())
         )).collect(Collectors.toList());
     }
 }
