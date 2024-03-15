@@ -100,7 +100,7 @@ public class BoardServiceImpl implements BoardService{
             dto.setTitle(boardEntity.getTitle());
             dto.setContents(boardEntity.getContents());
             dto.setViewCnt(boardEntity.getViewCnt());
-            dto.setCreateDate(boardEntity.getCreateDate());
+            dto.setCreateDate(localtimeToString(boardEntity.getCreateDate()));
             dtoSearchList.add(dto); 
         }
         return dtoSearchList; 
