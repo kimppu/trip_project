@@ -2,8 +2,6 @@ package com.example.travelproject.model.dao;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-
 import com.example.travelproject.model.entity.BoardEntity;
 
 public interface BoardDao {
@@ -18,8 +16,6 @@ public interface BoardDao {
     public BoardEntity findByNoticeId(long noticeId);
     // 게시글 목록 
     public List<BoardEntity> findNoticeList();
-    // 게시글 목록 페이징
-    public Page<BoardEntity> getNoticeList(int page); 
     // 게시글 검색
     public List<BoardEntity> findByTitleContaining(String keyword);
     // 조회수 업데이트

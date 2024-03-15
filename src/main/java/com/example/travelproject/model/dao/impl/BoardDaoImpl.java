@@ -3,9 +3,6 @@ package com.example.travelproject.model.dao.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -42,12 +39,6 @@ public class BoardDaoImpl implements BoardDao{
     // 게시글 목록 
     public List<BoardEntity> findNoticeList(){
         return boardRepository.findAll(Sort.by(Sort.Direction.DESC, "createDate"));
-    }
-
-    // 게시글 목록 가져오기 
-    public Page<BoardEntity> getNoticeList(int page) {
-        Pageable pageable = PageRequest.of(page,10); 
-        return boardRepository.findAll(pageable);
     }
 
     // 게시글 검색

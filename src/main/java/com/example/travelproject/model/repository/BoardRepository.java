@@ -11,8 +11,6 @@ import com.example.travelproject.model.entity.BoardEntity;
 
 
 public interface BoardRepository extends JpaRepository<BoardEntity, Long>{
-    //전체 목록 페이징
-    public Page<BoardEntity> findAll(Pageable pageable); 
     //해당 게시글 가져오기 
     public BoardEntity findByNoticeId(long noticeId);
     //keyword로 게시글 검색
