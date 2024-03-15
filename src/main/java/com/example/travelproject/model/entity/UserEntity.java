@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.example.travelproject.config.base.BaseEntity;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,7 +28,7 @@ import lombok.ToString;
 @ToString
 @Entity(name = "UserEntity")
 @Table(name = "user")
-public class UserEntity {
+public class UserEntity extends BaseEntity{
     @Id // 기본키: 유니크
     @NotBlank
     private String userId;
@@ -39,8 +41,7 @@ public class UserEntity {
     @NotBlank
     private String userNm;
     private String userSex;
-    @CreationTimestamp
-    private java.sql.Timestamp createDate;
+
     @NotBlank
     @Pattern(regexp = "^01(?:0|1|[6-9])-?\\d{3,4}-?\\d{4}$", message = "올바른 전화번호를 입력해주세요.")
     private String userPhNmb;
@@ -51,6 +52,6 @@ public class UserEntity {
     private Boolean isLogin;
 
     
-    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<BoardEntity> boardList;
 }

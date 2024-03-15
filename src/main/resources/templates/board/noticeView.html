@@ -1,34 +1,136 @@
 {{>common/header}}
-<title>게시판</title>
-<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+<title>게 시 판</title>
 </head>
+<style>
+	
+	.notice_panel{
+		/* display: none !important; */
+		width: 100%;
+		height: 100%;
+		-webkit-animation: fadeEffect 1s;
+		animation: fadeEffect 1s;
+	}
+	.notice_title{
+		font-weight: 700;
+		color: #2d2c2c;
+		margin-top: 60px;
+		margin-bottom: 30px;
+	}
+	.notice_head{
+		font-size: 24px;
+		color: #929191;
+		line-height: 1.336;
+		margin-bottom: 0px;
+		align-items: center;
+		border-bottom: 1px solid;
+	}
+	.notice_save_btn {
+		width: 100px;
+		display: block;
+		font-size: 13px;
+		font-weight: 700;
+        border-color : #350a4e;
+		background-color: #350a4e;
+		color: #fff;
+		text-transform: uppercase;
+		line-height: 40px;
+		padding-left: 46px;
+		padding-right: 46px;
+		white-space: nowrap;
+		z-index: 2;
+	}
+	.notice_save_btn:hover{
+		background-color: #fa9e1b;
+	}
+
+	.board_row{
+		padding-top:2%;
+	}
+
+    #noticeContents{
+        height: 50vh;
+        resize : None;
+    }
+
+    .noticeLabel{
+        font-size: 20px;
+        font-weight: 700;
+        color : #350a4e;
+    }
+    .notice_title_row{
+        margin-top: 20px;
+    }
+    .align-bottom {
+        align-self: flex-end !important;
+    }
+    .notice_sub_row{
+        margin-top:30px;
+    }
+    textarea[readonly] {
+        background-color: #FFFFFF;
+    }
+    .notice_btn a{
+		width: 100px;
+		display: block;
+		font-size: 13px;
+		font-weight: 700;
+		background-color: #350a4e;
+		color: #fff;
+		text-transform: uppercase;
+		line-height: 40px;
+		padding-left: 46px;
+		padding-right: 46px;
+		white-space: nowrap;
+		z-index: 2;
+	}
+	.notice_btn a:hover{
+		background-color: #fa9e1b;
+	}
+</style>
 <body>
-    <div class="row">
-        <div class="col">
-            <h2> 제목 : {{notice.title}}</h2>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-7">
-            <p>작성자 : {{notice.userId}}</p>
-        </div>
-        <div class="col-3">
-            <p>작성일자 :  {{notice.createDate}}</p>
-        </div>
-        <div class="col-2">
-            <p> 조회수 : {{notice.viewCnt}}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col d-flex flex-lg-row justify-content-center">
-            <textarea readonly="true">{{notice.contents}}</textarea>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col d-flex justify-content-end">
-            <button>수정</button>
-        </div>
-    </div>
+
+<div class="noticeView">
+	<div class="container">
+		<div class="notice_panel">
+            <div class="row notice_title_row">
+				<div class="col py-0">
+					<h2 class="notice_title my-0 py-0">{{notice.title}}</h2>
+				</div>
+			</div>
+
+            <div class="row notice_sub_row">
+                <div class="col-md-7 col-sm-12 align-bottom">
+                    작성자 : {{notice.userId}}
+                </div>
+                <div class="col-md-3 col-sm-12 .align-bottom">
+                    작성일자 : {{notice.createDate}}
+                </div>
+                <div class="col-md-2 col-sm-12 .align-bottom">
+                    조회수 : {{notice.viewCnt}} View
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col d-flex flex-lg-row justify-content-center">
+                    <textarea class="form-control" id="noticeContents" name="contents" rows="3" readonly>{{notice.contents}}</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col d-flex justify-content-end notice_btn">
+                    <a class="btn my-1 px-1 py-0" role="button" href="/board/notice" style="font-size:15px;" >
+                        수정
+                    </a>
+                </div>
+            </div>
+            
+		</div>
+	</div>
+	{{#authentication}}
+		{{username}}
+	{{/authentication}}
+</div>
 </body>
-</html
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+{{>common/footer}}	
