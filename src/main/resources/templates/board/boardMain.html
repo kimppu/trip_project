@@ -28,7 +28,7 @@
 	.notice_head p{
 		margin-top:10px;
 		color: #FFFFFF;
-		font-size: 13px;
+		font-size: 15px;
 		font-weight: 700;
 	}
 	.notice_btn a{
@@ -63,13 +63,13 @@
 				</div>
 			</div>
 			<div class="row notice_head">
-				<div class="col-1 align-items-center">
+				<div class="col-1 align-items-center text-center">
 					<p>번호</p>
 				</div>
-				<div class="col-5 align-items-center">
+				<div class="col-6 align-items-center">
 					<p>제목</p>
 				</div>
-				<div class="col-2 align-items-center">
+				<div class="col-1 align-items-center">
 					<p>작성자</p>
 				</div>	
 				<div class="col-3 align-items-center">
@@ -81,13 +81,13 @@
 			</div>
 			{{#boardList}}
 			<div class="board_row row my-0">
-				<div class="col-1 d-flex py-0">
+				<div class="col-1 d-flex py-0 text-center justify-content-center">
 					<p>{{noticeId}}</p>
 				</div>
-				<div class="col-5 d-flex py-0">
+				<div class="col-6 d-flex py-0">
 					<a href="/board/notice/{{noticeId}}"><p>{{title}}</p></a>
 				</div>
-				<div class="col-2 d-flex py-0">
+				<div class="col-1 d-flex py-0">
 					<p>{{userId}}</p>
 				</div>	
 				<div class="col-3 d-flex py-0">
