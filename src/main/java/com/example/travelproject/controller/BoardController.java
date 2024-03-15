@@ -62,6 +62,7 @@ public class BoardController {
     public String viewNotice(@PathVariable("noticeId") Long noticeId, Model model){
         log.info("[BoardController][viewNotice] start");
 
+        boardService.updateViewCnt(noticeId); 
         BoardDto boardDto = boardService.findtByNoticeId(noticeId);
         model.addAttribute("notice", boardDto);
         return "board/noticeView";
@@ -78,6 +79,7 @@ public class BoardController {
         BoardDto boardDto = boardService.findtByNoticeId(noticeId); 
         boardDto.setUserId(userDetails.getUsername());
         model.addAttribute("notice", boardDto);
+
         return "board/noticeForm"; 
     }
 
