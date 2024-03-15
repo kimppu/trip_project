@@ -6,7 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.travelproject.model.dto.CommentDto;
 import com.example.travelproject.service.CommentService;
 
@@ -37,7 +40,7 @@ public class CommentController {
 
     // 댓글 저장
     @PostMapping("/save")
-    public String saveComment(CommentDto commentDto) {
+    public String saveComment(@RequestBody CommentDto commentDto) {
         commentService.saveComment(commentDto);
         return "redirect:/comments"; // 댓글 목록으로 리다이렉트
     }

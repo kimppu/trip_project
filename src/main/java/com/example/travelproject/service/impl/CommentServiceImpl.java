@@ -4,6 +4,9 @@ import com.example.travelproject.model.dao.CommentDao;
 import com.example.travelproject.model.dto.CommentDto;
 import com.example.travelproject.model.entity.CommentEntity;
 import com.example.travelproject.service.CommentService;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
+@Slf4j
 @Service
 public class CommentServiceImpl implements CommentService {
 
