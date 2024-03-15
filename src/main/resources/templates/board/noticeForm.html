@@ -78,9 +78,7 @@
                         <div class="mb-3">
                             <label for="noticeContents" class="noticeLabel">내용</label>
                             {{#notice}}
-                                <textarea class="form-control" id="noticeContents" name="contents" rows="3">
-                                    {{contents}}
-                                </textarea>
+                            <textarea class="form-control" id="noticeContents" name="contents" rows="3">{{contents}}</textarea>
                             {{/notice}}
                             {{^notice}}
                             <textarea class="form-control" id="noticeContents" name="contents" rows="3"></textarea>

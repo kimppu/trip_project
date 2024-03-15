@@ -108,8 +108,8 @@ public class BoardServiceImpl implements BoardService{
     
     // 조회수 증가
     public void updateViewCnt(long noticeId) {
-        BoardEntity entity = boardDao.findByNoticeId(noticeId);
-        boardDao.updateViewCnt(entity.getNoticeId());
+        // BoardEntity entity = boardDao.findByNoticeId(noticeId);
+        boardDao.updateViewCnt(noticeId);
     }
     
 }
