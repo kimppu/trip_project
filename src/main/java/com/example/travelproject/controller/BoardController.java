@@ -69,20 +69,13 @@ public class BoardController {
 
 
     // 게시글 수정
-    // 권한 : 관리자&&작성자(authentication )
+    // 권한 : 관리자만(authentication)
     @PostMapping("/notice/{noticeId}/edit")
     public String editNotice(@PathVariable("noticeId") Long noticeId, Authentication authentication, Model model){
         log.info("[BoardController][editNotice] start");
         
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
         BoardDto boardDto = boardService.findtByNoticeId(noticeId); 
-        
-        // if(userDetails.getUsername().equals(boardDto.getUserId())){
-        //     boardDto.setUserId(userDetails.getUsername());
-        //     model.addAttribute("notice", boardDto);
-        //     return "board/noticeForm"; 
-        // } 조건 작성자로 할 경우 주석 풀기 
-
         boardDto.setUserId(userDetails.getUsername());
         model.addAttribute("notice", boardDto);
         return "board/noticeForm"; 

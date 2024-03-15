@@ -117,12 +117,13 @@
             </div>
             <div class="row">
                 <div class="col d-flex justify-content-end notice_btn">
-                    <a class="btn my-1 px-1 py-0" role="button" href="/board/notice" style="font-size:15px;" >
-                        수정
+					<form class = "btn my-1 px-1 py-0" action = "/notice/{{notice.noticeId}}/edit" method = "post"></form>
+                    <!-- <a class="btn my-1 px-1 py-0" role="button" href="/notice/{{notice.noticeId}}/edit" style="font-size:15px;" > -->
+					<button class="btn notice_save_btn my-1 px-1 py-0" style="font-size:15px;" type="submit">수정</button>
                     </a>
                 </div>
             </div>
-            
+			
 		</div>
 	</div>
 	{{#authentication}}
