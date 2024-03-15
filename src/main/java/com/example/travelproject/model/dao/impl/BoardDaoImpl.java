@@ -31,13 +31,25 @@ public class BoardDaoImpl implements BoardDao{
         boardRepository.deleteById(noticeId);
     }
 
-    // 게시글 선택 : select
-    public BoardEntity findByNoticeId(long noticeId){
+    // 게시글 선택 : find
+    public  BoardEntity findByNoticeId(long noticeId){
         return boardRepository.findByNoticeId(noticeId);
     }
 
-    // 게시글 목록 : show
+    // 게시글 목록 
     public List<BoardEntity> findNoticeList(){
         return boardRepository.findAll(Sort.by(Sort.Direction.DESC, "createDate"));
     }
+
+    // 게시글 검색
+    public List<BoardEntity> findByTitleContaining(String keyword){
+        return boardRepository.findByTitleContaining(keyword);
+    }    
+
+    // 게시글 조회수 업데이트 
+    public BoardEntity updateViewCnt(long noticeId) {
+        BoardEntity entity = boardRepository.updateViewCnt(noticeId);
+        return boardRepository.save(entity); 
+    }
+
 }

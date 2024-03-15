@@ -16,7 +16,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 
-<script>
+<script type="text/javascript">
 	$(function(){		
 		if($("#joinForm").submit(function(){
 			if($("#userPw").val() !== $("#userPw2").val()){
@@ -31,21 +31,47 @@
 		}));
 	})
 
-    function compare_id() {
-        if ($("#userId").val() != $("#userId_list").val()) {
-            alert("아이디가 중복됩니다.");
-        }
-    }
+    $(document).ready(function() {
+        //ID 중복 확인
+        //id를 입력할 수 있는 input text 영역을 벗어나면 동작한다.
+        $("#userId").on("focusout", function() {
+            
+            var id = $("#userId").val();
+            
+            if(id == '' || id.length == 0) {
+                $("#label1").css("color", "red").text("공백은 ID로 사용할 수 없습니다.");
+                return false;
+            }
+            
+            //Ajax로 전송
+            $.ajax({
+                url : './ConfirmId',
+                data : {
+                    id : id
+                },
+                type : 'POST',
+                dataType : 'json',
+                success : function(result) {
+                    if (result == true) {
+                        $("#label1").css("color", "black").text("사용 가능한 ID 입니다.");
+                    } else{
+                        $("#label1").css("color", "red").text("사용 불가능한 ID 입니다.");
+                        $("#userId").val('');
+                    }
+                }
+            }); //End Ajax
+        });
+    })
 </script>
 
 <body>
-    <div class="menu_content d-flex flex-column align-items-center justify-content-center text-center">
+    <div class="menu_content d-flex flex-column align-items-center justify-content-left text-center">
         <div class="menu_close_container"><div class="menu_close"></div></div>
         <h1>Join Page</h1>
         <form id="joinForm" action="/join" method="post">
-            <label for="id">* Id: </label>
-            <input type="text" name="userId" placeholder="아이디를 입력하세요." required>
-            <button onclick="compare_id();">중복 확인</button> <small>숫자-영문 소문자 이외 항목 미포함</small>
+            <label for="label1">* Id: </label>
+            <input class="form-control" type="text" id="userId" name="userId" placeholder="아이디를 입력하세요." required autofocus>
+            <!-- <button>중복 확인</button> <small>숫자-영문 소문자 이외 항목 미포함</small> -->
             <br>
             <label for="pwd">* Password: </label>
             <input type="password" id="userPw" name="userPw" placeholder="비밀번호를 입력하세요." required> <small>최소 8글자</small>
