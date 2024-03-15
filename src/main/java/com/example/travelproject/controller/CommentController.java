@@ -1,74 +1,62 @@
 package com.example.travelproject.controller;
 
-import com.example.travelproject.model.dto.CommentDto;
-import com.example.travelproject.model.entity.CommentEntity;
-import com.example.travelproject.model.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import com.example.travelproject.model.dto.CommentDto;
+import com.example.travelproject.service.CommentService;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-@RestController
+@Controller
 @RequestMapping("/comments")
 public class CommentController {
 
-    private CommentRepository commentTestRepository;
+    private final CommentService commentService;
 
     @Autowired
-    public CommentController(CommentRepository commentTestRepository) {
-        this.commentTestRepository = commentTestRepository;
+    public CommentController(CommentService commentService) {
+        this.commentService = commentService;
     }
 
-    // 모든 댓글 조회
-    @GetMapping
-    public ResponseEntity<List<CommentDto>> getAllComments() {
-        List<CommentDto> comments = commentTestRepository.findAll().stream()
-                .map(entity -> new CommentDto(entity.getCommentId(), entity.getNotice(), entity.getUser(), entity.getContents(), entity.getCreateDate()))
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(comments);
+    // 댓글 목록 페이지
+    @GetMapping("list1")
+    public String listComments(Model model) {
+        model.addAttribute("comments", commentService.findAllComments());
+        return "comments/list"; // comments/list.html 뷰 반환
     }
 
-    // 댓글 작성
-    @PostMapping
-    public ResponseEntity<CommentEntity> createComment(@RequestBody CommentDto commentDto) {
-        CommentEntity newComment = new CommentEntity();
-        newComment.setNotice(commentDto.getNotice());
-        newComment.setUser(commentDto.getUser());
-        newComment.setContents(commentDto.getContents());
-        CommentEntity savedComment = commentTestRepository.save(newComment);
-        return ResponseEntity.ok(savedComment);
+    // 댓글 작성 페이지
+    @GetMapping("/new")
+    public String newCommentForm(Model model) {
+        model.addAttribute("comment", new CommentDto());
+        return "comments/new"; // comments/new.html 뷰 반환
     }
 
-    // 댓글 수정
-    @PutMapping("/fixed")
-    public ResponseEntity<CommentEntity> updateComment(@PathVariable Long id, @RequestBody CommentDto commentDto) {
-        return commentTestRepository.findById(id)
-                .map(comment -> {
-                    comment.setContents(commentDto.getContents());
-                    // 필요에 따라 다른 필드도 업데이트
-                    CommentEntity updatedComment = commentTestRepository.save(comment);
-                    return ResponseEntity.ok(updatedComment);
-                }).orElseGet(() -> ResponseEntity.notFound().build());
+    // 댓글 저장
+    @PostMapping("/save")
+    public String saveComment(CommentDto commentDto) {
+        commentService.saveComment(commentDto);
+        return "redirect:/comments"; // 댓글 목록으로 리다이렉트
+    }
+
+    // 댓글 상세 보기
+    @GetMapping("/{commentId}")
+    public String viewComment(@PathVariable Long commentId, Model model) {
+        CommentDto commentDto = commentService.findCommentById(commentId);
+        model.addAttribute("comment", commentDto);
+        return "comments/view"; // comments/view.html 뷰 반환
     }
 
     // 댓글 삭제
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteComment(@PathVariable Long id) {
-        if (commentTestRepository.existsById(id)) {
-            commentTestRepository.deleteById(id);
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.notFound().build();
+    @GetMapping("/delete/{commentId}")
+    public String deleteComment(@PathVariable Long commentId) {
+        commentService.deleteComment(commentId);
+        return "redirect:/comments"; // 댓글 목록으로 리다이렉트
     }
 
-    // 댓글 ID로 조회
-    @GetMapping("/see") //"/{id}"
-    public ResponseEntity<CommentDto> getCommentById(@PathVariable Long id) {
-        return commentTestRepository.findById(id)
-                .map(entity -> new CommentDto(entity.getCommentId(), entity.getNotice(), entity.getUser(), entity.getContents(), entity.getCreateDate()))
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
+    // 이렇게 컨트롤러를 수정하면, 각 메소드는 HTML 템플릿 뷰를 반환합니다.
+    // 각 경로에 맞는 HTML 파일을 생성해야 합니다 (예: list.html, new.html, view.html 등).
 }
