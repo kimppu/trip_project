@@ -57,6 +57,5 @@ public class CommentController {
         return "redirect:/comments"; // 댓글 목록으로 리다이렉트
     }
 
-    // 이렇게 컨트롤러를 수정하면, 각 메소드는 HTML 템플릿 뷰를 반환합니다.
-    // 각 경로에 맞는 HTML 파일을 생성해야 합니다 (예: list.html, new.html, view.html 등).
+
 }
