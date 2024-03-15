@@ -29,7 +29,7 @@ public class CommentEntity extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long commentId;
+    private Long commentId;
     
     @ManyToOne
     @JoinColumn(name = "notice_id")

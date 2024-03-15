@@ -14,9 +14,9 @@ import lombok.ToString;
 @ToString
 public class CommentDto {
 
-    private long commentId;
-    private String notice; // 게시판 엔티티에 대한 참조
-    private String user; // 사용자 엔티티에 대한 참조
+    private Long commentId;
+    private Long noticeId; // 게시판 엔티티에 대한 참조
+    private String userId; // 사용자 엔티티에 대한 참조
     private String contents;
     private String createDate;
 
