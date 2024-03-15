@@ -27,12 +27,12 @@ public class BoardDaoImpl implements BoardDao{
     }
 
     // 글 삭제 : delete
-    public void deleteNotice(long noticeId){
+    public void deleteNotice(Long noticeId){
         boardRepository.deleteById(noticeId);
     }
 
     // 게시글 선택 : find
-    public  BoardEntity findByNoticeId(long noticeId){
+    public  BoardEntity findByNoticeId(Long noticeId){
         return boardRepository.findByNoticeId(noticeId);
     }
 
@@ -47,9 +47,8 @@ public class BoardDaoImpl implements BoardDao{
     }    
 
     // 게시글 조회수 업데이트 
-    public BoardEntity updateViewCnt(long noticeId) {
-        BoardEntity entity = boardRepository.updateViewCnt(noticeId);
-        return boardRepository.save(entity); 
+    public void updateViewCnt(Long noticeId) {
+        boardRepository.updateViewCnt(noticeId);
     }
 
 }
