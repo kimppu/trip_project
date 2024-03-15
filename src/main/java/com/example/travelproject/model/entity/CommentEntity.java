@@ -2,6 +2,8 @@ package com.example.travelproject.model.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.example.travelproject.config.base.BaseEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +25,7 @@ import lombok.ToString;
 @ToString
 @Entity(name = "CommentEntity")
 @Table(name = "comment")
-public class CommentEntity {
+public class CommentEntity extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +42,4 @@ public class CommentEntity {
     @Column(nullable = false)
     private String contents;
 
-    @CreationTimestamp
-    private java.sql.Timestamp createDate;
 }
