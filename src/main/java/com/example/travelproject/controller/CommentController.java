@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.travelproject.model.dto.CommentDto;
 import com.example.travelproject.service.CommentService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/comments")
 public class CommentController {
 
-    private final CommentService commentService;
-
     @Autowired
-    public CommentController(CommentService commentService) {
-        this.commentService = commentService;
-    }
+    private CommentService commentService;
+
 
     // 댓글 목록 페이지
     @GetMapping("list1")
@@ -41,6 +41,8 @@ public class CommentController {
     // 댓글 저장
     @PostMapping("/save")
     public String saveComment(@RequestBody CommentDto commentDto) {
+        log.info("[CommentController][save] start");
+        log.info(commentDto.getNoticeId() + commentDto.getContents());
         commentService.saveComment(commentDto);
         return "redirect:/comments"; // 댓글 목록으로 리다이렉트
     }

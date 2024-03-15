@@ -1,11 +1,11 @@
 package com.example.travelproject.model.entity;
 
+import java.util.List;
+
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
 
 import com.example.travelproject.config.base.BaseEntity;
 
-import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,7 +34,7 @@ public class BoardEntity extends BaseEntity{
     // private UserEntity userEntity; 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
-    private long noticeId; 
+    private Long noticeId; 
 
     // 작성자
     @ManyToOne

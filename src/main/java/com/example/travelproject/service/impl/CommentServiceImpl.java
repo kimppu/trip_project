@@ -1,26 +1,30 @@
 package com.example.travelproject.service.impl;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.travelproject.model.dao.BoardDao;
 import com.example.travelproject.model.dao.CommentDao;
 import com.example.travelproject.model.dto.CommentDto;
 import com.example.travelproject.model.entity.CommentEntity;
 import com.example.travelproject.service.CommentService;
 
 import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class CommentServiceImpl implements CommentService {
 
     @Autowired
     private CommentDao commentDao;
+
+    @Autowired 
+    private BoardDao boardDao;
 
     @Override
     public void saveComment(CommentDto dto) {
@@ -29,6 +33,7 @@ public class CommentServiceImpl implements CommentService {
         // comment.setNotice(dto.getNotice());
         // comment.setUser(dto.getUser());
         comment.setContents(dto.getContents());
+        comment.setNotice(boardDao.findByNoticeId(dto.getNoticeId()));
         commentDao.saveComment(comment);
     }
 
@@ -57,7 +62,7 @@ public class CommentServiceImpl implements CommentService {
             return new CommentDto(
                 entity.getCommentId(),
                 // Convert Entity references to appropriate identifiers or objects
-                entity.getNotice().toString(), // 예시입니다. 실제 구현은 조정이 필요합니다.
+                entity.getNotice().getNoticeId(), // 예시입니다. 실제 구현은 조정이 필요합니다.
                 entity.getUser().toString(), // 예시입니다.
                 entity.getContents(),
                 localtimeToString(entity.getCreateDate())
@@ -75,7 +80,7 @@ public class CommentServiceImpl implements CommentService {
         return commentDao.findAllComments().stream().map(entity -> new CommentDto(
             entity.getCommentId(),
             // Again, convert these entities as needed
-            entity.getNotice().toString(), // 예시입니다.
+            entity.getNotice().getNoticeId(), // 예시입니다.
             entity.getUser().toString(), // 예시입니다.
             entity.getContents(),
             localtimeToString(entity.getCreateDate())
