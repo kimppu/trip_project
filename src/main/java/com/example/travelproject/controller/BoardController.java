@@ -78,9 +78,10 @@ public class BoardController {
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
         BoardDto boardDto = boardService.findtByNoticeId(noticeId); 
         boardDto.setUserId(userDetails.getUsername());
+        boardService.saveNotice(boardDto);
         model.addAttribute("notice", boardDto);
 
-        return "board/noticeForm"; 
+        return "redirect:/notice/{noticeId}"; 
     }
 
 
