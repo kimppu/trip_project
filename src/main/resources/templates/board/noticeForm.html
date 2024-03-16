@@ -63,36 +63,46 @@
 <div class="noticeList">
 	<div class="container">
 		<div class="notice_panel">
+			{{^notice}}
             <div class="row">
 				<div class="col">
 					<h2 class="notice_title text-center">새글 등록</h2>
 				</div>
 			</div>
-            <div class="row">
-                <div class="col">
-					{{#notice}}
-					<form class="mt-3" action="/board/notice/{noticeId}/edit" method="post">
+            <div class="row">	
+                <div class="col">					
+					<!-- {{^notice}} -->
+					<form class="mt-3" action="/board/notice/save" method="post">
+						<div class="mt-3">
+							<label for="noticeTitle" class="noticeLabel">제목</label>
+                            <input type="text" class="form-control" name="title" id="noticeTitle">
+							<label for="noticeContents" class="noticeLabel">내용</label>	
+                            <textarea class="form-control" id="noticeContents" name="contents" rows="3"></textarea>
+							<div class="notice_btn d-flex justify-content-end">
+								<button class="btn notice_save_btn my-1 px-1 py-0" style="font-size:15px;" type="submit">저장</button>
+                        </div>
+					</form>
+					<!-- {{/notice}} -->
+				</div>
+			</div>
+			{{/notice}}
+
+			{{#notice}}
+				<div class="col">
+					<h2 class="notice_title text-center">글 수정</h2>
+				</div>
+					<form class="mt-3" action="/board/notice/{{notice.noticeId}}/edit.do" method="post">
                         <div class="mb-3">
                             <label for="noticeTitle" class="noticeLabel">제목</label>
                             <input type="text" class="form-control" name="title" id="noticeTitle" value="{{notice.title}}" required>
-                        </div>
-					</form>
-                        <div class="mb-3">
                             <label for="noticeContents" class="noticeLabel">내용</label>
                             <textarea class="form-control" id="noticeContents" name="contents" rows="3">{{notice.contents}}</textarea>
+							<div class="notice_btn d-flex justify-content-end">
+								<button class="btn notice_save_btn my-1 px-1 py-0" style="font-size:15px;" type="submit">저장</button>
 						</div>
-                    {{/notice}}
-					
-					{{^notice}}
-					<form class="mt-3" action="/board/notice/save" method="post">
-                            <textarea class="form-control" id="noticeContents" name="contents" rows="3"></textarea>
-                        </div>
-					</form>
-					{{/notice}}
-                    <div class="notice_btn d-flex justify-content-end">
-                        <button class="btn notice_save_btn my-1 px-1 py-0" style="font-size:15px;" type="submit">저장</button>
-					</div>
+					</form>	
                 </div>
+			{{/notice}}
             </div>
 		</div>
 	</div>

@@ -45,15 +45,21 @@ public class BoardServiceImpl implements BoardService{
 
     // 글 수정 : update
     public void updateNotice(BoardDto dto){
-        BoardEntity entity = boardDao.findByNoticeId(dto.getNoticeId());
-        boardDao.updateNotice(entity);
+        BoardEntity updateEntity = boardDao.findByNoticeId(dto.getNoticeId());
+        UserEntity userEntity = userDao.findByUserId(dto.getUserId());
+        updateEntity.setUser(userEntity);
+        updateEntity.setTitle(dto.getTitle()); 
+        updateEntity.setContents(dto.getContents()); 
+        boardDao.updateNotice(updateEntity);
     }
+
 
     // 글 삭제 : delete
     public void deleteNotice(long noticeId){
         BoardEntity entity = boardDao.findByNoticeId(noticeId);
         boardDao.deleteNotice(entity.getNoticeId());
     }
+
 
     // 글 선택
     public BoardDto findtByNoticeId(long noticeId){
@@ -67,6 +73,7 @@ public class BoardServiceImpl implements BoardService{
         dto.setCreateDate(localtimeToString(entity.getCreateDate()));
         return dto;
     }
+
 
     // 글 전체 리스트
     public List<BoardDto> findNoticeList(){
@@ -85,9 +92,11 @@ public class BoardServiceImpl implements BoardService{
         return dtoList;   
     }
 
+
     public String localtimeToString(LocalDateTime localDateTime){
         return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(localDateTime);
     }
+
 
     // 검색 결과 리스트 
     public List<BoardDto> findSearchList(String keyword){
@@ -106,10 +115,12 @@ public class BoardServiceImpl implements BoardService{
         return dtoSearchList; 
     }
     
+
     // 조회수 증가
     public void updateViewCnt(long noticeId) {
         // BoardEntity entity = boardDao.findByNoticeId(noticeId);
         boardDao.updateViewCnt(noticeId);
     }
+    
     
 }
