@@ -1,0 +1,117 @@
+.notice_panel{
+    /* display: none !important; */
+    width: 100%;
+    height: 100%;
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s;
+}
+.notice_title{
+    font-weight: 700;
+    color: #2d2c2c;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+.notice_head{
+    font-size: 24px;
+    background-color: #350a4e ;
+    line-height: 1.336;
+    margin-bottom: 0px;
+    align-items: center;
+    border-bottom: 1px solid;
+}
+
+.notice_head p{
+    margin-top:10px;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 700;
+}
+.notice_btn a,.comments_btn a{
+    width: 100px;
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    background-color: #350a4e;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 40px;
+    padding-left: 46px;
+    padding-right: 46px;
+    white-space: nowrap;
+    z-index: 2;
+}
+.notice_link a:hover{
+    font-weight: 500;
+    color : black;
+}
+.notice_btn a:hover, .comments_btn a:hover{
+    background-color: #fa9e1b;
+    border-color : #fa9e1b;
+}
+
+.board_row{
+    padding-top:2%;
+}
+
+.notice_save_btn, .comments_save_btn {
+    width: 100px;
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    border-color : #350a4e;
+    background-color: #350a4e;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 40px;
+    padding-left: 46px;
+    padding-right: 46px;
+    white-space: nowrap;
+    z-index: 2;
+}
+.notice_save_btn:hover, .comments_save_btn:hover{
+    background-color: #fa9e1b;
+}
+
+#noticeContents{
+    height: 50vh;
+    resize : None;
+}
+
+.noticeLabel{
+    font-size: 20px;
+    font-weight: 700;
+    color : #350a4e;
+}
+
+.notice_title_row{
+    margin-top: 20px;
+}
+.align-bottom {
+    align-self: flex-end !important;
+}
+.notice_sub_row{
+    margin-top:30px;
+    color : black;
+    font-weight: 500;
+}
+textarea[readonly] {
+    background-color: #FFFFFF;
+}
+
+.notice_del_btn{
+    width: 100px;
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    background-color: #cb5478;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 40px;
+    padding-left: 46px;
+    padding-right: 46px;
+    white-space: nowrap;
+    z-index: 2;
+}
+.notice_del_btn:hover{
+    background-color: #cc0843;
+}

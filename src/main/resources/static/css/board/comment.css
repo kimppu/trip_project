@@ -1,0 +1,80 @@
+#commentContents{
+    height: 10vh;
+    resize : None;
+}
+.comments_panel{
+    width: 100%;
+    height: 100%;
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s;
+}
+textarea{
+    color:black;
+}
+
+.content_save_btn{
+    width: 100px;
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    background-color: #f9b56d;
+    color: #000000;
+    text-transform: uppercase;
+    line-height: 40px;
+    padding-left: 46px;
+    padding-right: 46px;
+    white-space: nowrap;
+    z-index: 2;
+} 
+.content_save_btn:hover{
+    background-color:#fa9e1b;
+}
+.comment_del_btn{
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 20px;
+    display: flex;
+    font-size: 10px;
+    font-weight: 700;
+    background-color: #cb5478;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 40px;
+    padding-left: 46px;
+    padding-right: 46px;
+    white-space: nowrap;
+    z-index: 2;
+}
+.comment_update_btn{
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 20px;
+    display: flex;
+    font-size: 10px;
+    font-weight: 700;
+    background-color: #350a4e;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 40px;
+    padding-left: 46px;
+    padding-right: 46px;
+    white-space: nowrap;
+    z-index: 2;
+}
+.comment_del_btn:hover{
+    background-color: #cc0843;
+}
+.comment_update_btn:hover{
+    background-color:#fa9e1b;
+}
+.comment_textarea{
+    height: 10vh;
+    resize : None;
+}
+.comment_user{
+    font-weight: 500;
+    font-size:17px;
+    color:black;
+}

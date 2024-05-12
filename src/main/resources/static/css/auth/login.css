@@ -1,0 +1,63 @@
+.login_card{
+    width:60%;
+    height:100%;
+}
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1050; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%; /* Could be more or less, depending on screen size */                          
+}
+.login_title{
+    font-weight: 700;
+    color: #2d2c2c;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+.login_btn{
+    width: 100px;
+    display: flex;
+    font-size: 13px;
+    font-weight: 700;
+    background-color: #350a4e;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 40px;
+    padding-left: 46px;
+    padding-right: 46px;
+    white-space: nowrap;
+    z-index: 2;
+}
+.login_btn:hover{
+    background-color: #fa9e1b;
+}
+.find_separator {
+margin: 0 5px; 
+}
+#find_wrap{
+    width:100%;
+}
+.find_text{
+    color:#007bff
+}
+.find_text:hover {
+    color: #011d3b; /* 원하는 색상으로 변경하세요 */
+    text-decoration: underline;
+    cursor: pointer;
+}

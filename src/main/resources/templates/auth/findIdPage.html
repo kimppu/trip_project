@@ -1,0 +1,44 @@
+{{>common/header}}
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/auth/find_id.css">
+<body>      
+    <div class="find_id_page contact_form_section">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                    <!-- form -->
+                    <div class="contact_form_container">
+                        <div class="contact_title text-center">아이디 찾기</div>
+                        <form action="/auth/find-id" id="contact_form" class="contact_form text-center" method="post">
+                            <div class="row justify-content-center">
+                                <input type="text" id="contact_form_name" name="userNm" class="contact_form_name input_field" placeholder="이름을 입력하세요." required="required" data-error="test">
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="email" id="contact_form_email" name="userEmail" class="contact_form_email input_field" placeholder="이메일을 입력하세요." required="required" date-error="test1">
+                            </div>
+                    
+                            <button type="submit" id="form_submit_button" class="form_submit_button button trans_200">아이디 찾기<span></span><span></span><span></span></button>
+                                <!-- 버튼을 누르면 post 방식으로 컨트롤에게 요청 -->
+                        </form>
+
+                        {{#errorMessage}}
+                        <div>
+                            <p>{{errorMessage}}</p>
+                        </div>
+                        {{/errorMessage}}
+                
+                
+                        <div class="contact_info_item d-flex justify-content-around">
+                            <div class="form_submit_button button trans_200"><a href="/auth/login" target="_top">로그인 화면 이동<span></span><span></span><span></span></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{>common/error_modal}}
+</body>
+<script src="/static/js/error/error_modal.js"></script>
+{{>common/footer}}	

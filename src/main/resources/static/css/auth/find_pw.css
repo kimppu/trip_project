@@ -1,0 +1,27 @@
+.join_title{
+    font-weight: 700;
+    color: #2d2c2c;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+.join_card{
+    width:60%;
+    height:100%;
+}
+.join_btn{
+    width: 100px;
+    display: flex;
+    font-size: 13px;
+    font-weight: 700;
+    background-color: #350a4e;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 40px;
+    padding-left: 46px;
+    padding-right: 46px;
+    white-space: nowrap;
+    z-index: 2;
+}
+.join_btn:hover{
+    background-color: #fa9e1b;
+}

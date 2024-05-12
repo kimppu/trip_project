@@ -1,0 +1,47 @@
+{{>common/header}}
+<link rel="stylesheet" type="text/css" href="/static/css/auth/find_id.css">
+<title>아이디 찾기</title>
+</head>
+<body>
+<div class="contact_form_section">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <!-- form -->
+                <div class="contact_form_container">
+                    <div id="userId">
+                        <p>User ID: {{ userId }}</p>
+                    </div>
+                    <div class="contact_info_item d-flex justify-content-around">
+                        <div class="contact_info_text"><a href="/auth/login" target="_top">로그인 화면 이동</a></div>
+                    </div>
+                    <div class="contact_info_item d-flex justify-content-around">
+                        <div class="contact_info_text"><a onclick="open_pop();">비밀번호 찾기</a></div>	
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+                <p style="text-align: center;">
+                    <span style="font-size: 14pt;">
+                        <b><span style="font-size: 15pt;">아이디를 입력하세요.</span></b></span></p>
+                <form name="loginForm" action="/auth/find-password" method="post">
+                    <input type="text" id="userId" name="userId" placeholder="아이디를 입력하세요." autofocus>
+                    <br>
+                    <input type="text" id="userNm" name="userNm" placeholder="이름 입력하세요.">
+                    <br>
+                    <input type="text" id="userEmail" name="userEmail" placeholder="이메일을 입력하세요.">
+                    <br>
+                    <input type="submit" value="조회하기">
+                </form>
+                <a onclick="close_pop();">
+                    <input type="submit" value="닫기">
+                </a>
+        </div>
+    </div>
+</div>
+<script src="/static/js/auth/user_id.js"></script>
+{{>common/footer}}
