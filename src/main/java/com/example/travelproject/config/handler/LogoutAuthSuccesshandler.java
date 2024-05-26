@@ -14,6 +14,7 @@ import com.example.travelproject.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @Component
 public class LogoutAuthSuccesshandler implements LogoutSuccessHandler {
@@ -25,10 +26,18 @@ public class LogoutAuthSuccesshandler implements LogoutSuccessHandler {
   @Override
   public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
       throws IOException, ServletException {
-    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-    userService.updateIsLoginById(userDetails.getUsername(), false);
+        if (authentication == null) {
+          response.sendRedirect("/main");
+        } else {
+          UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+          userService.updateIsLoginById(userDetails.getUsername(), false);
+          HttpSession session = request.getSession();
+          
+          session.removeAttribute("userNm");
+          session.removeAttribute("adminYn");
 
-    response.sendRedirect("/index");
-  }
+          response.sendRedirect("/main");
+        }
+        }
   
 }

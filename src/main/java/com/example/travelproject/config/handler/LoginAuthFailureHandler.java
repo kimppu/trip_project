@@ -20,26 +20,19 @@ public class LoginAuthFailureHandler extends SimpleUrlAuthenticationFailureHandl
 
   @Override
   public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-      AuthenticationException exception) throws IOException, ServletException {
-    
-    log.error("[LoginAuthFailureHandler][onAuthenticationFailure] Start");
-    exception.printStackTrace();
-    writePrintErrorResponse(response, exception);
+    AuthenticationException exception) throws IOException, ServletException {
+      log.error("[LoginAuthFailureHandler][onAuthenticationFailure] Start");
+      exception.printStackTrace();
+      writePrintErrorResponse(response, exception);
+      super.onAuthenticationFailure(request, response, exception);
+    }
 
-    super.onAuthenticationFailure(request, response, exception);
-  }
-
-  private void writePrintErrorResponse(HttpServletResponse response,
-      AuthenticationException exception) throws IOException {
-
-          AuthenticationTypes authenticationTypes = AuthenticationTypes.valueOf(exception.getClass().getSimpleName());
-          String errorMessage = authenticationTypes.getMsg();
-          int code = authenticationTypes.getCode();
-          log.error("message: "+errorMessage+" / code: "+code);
-
-          errorMessage = URLEncoder.encode(errorMessage, "UTF-8"); /* 한글 인코딩 깨진 문제 방지 */
-          setDefaultFailureUrl("/loginPage?errorMessage="+errorMessage);
-
-      }
-  
+  private void writePrintErrorResponse(HttpServletResponse response, AuthenticationException exception) throws IOException {
+    AuthenticationTypes authenticationTypes = AuthenticationTypes.valueOf(exception.getClass().getSimpleName());
+    String errorMessage = authenticationTypes.getMsg();
+    int code = authenticationTypes.getCode();
+    log.error("[LoginAuthFailureHandler][writePrintErrorResponse] > message: " + errorMessage + " / code: "+code);
+    errorMessage = URLEncoder.encode(errorMessage, "UTF-8"); /* 한글 인코딩 깨진 문제 방지 */
+    setDefaultFailureUrl("/auth/login?errorMessage="+errorMessage); // 주소창에 에러메시지 추가해줌
+    } 
 }

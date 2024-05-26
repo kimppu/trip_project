@@ -13,10 +13,11 @@ import lombok.ToString;
 @ToString
 public class BoardDto {
 
-    private long noticeId; 
+    private int rowNum;
+    private Long noticeId; 
     private String userId; 
     private String title; 
     private String contents;
     private int viewCnt;
-    private java.sql.Timestamp createDate;
+    private String createDate;
 }

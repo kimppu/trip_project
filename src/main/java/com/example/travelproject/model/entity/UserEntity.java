@@ -2,11 +2,13 @@ package com.example.travelproject.model.entity;
 
 import java.util.List;
 
-import org.hibernate.annotations.CreationTimestamp;
+import com.example.travelproject.model.base.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -26,9 +28,10 @@ import lombok.ToString;
 @ToString
 @Entity(name = "UserEntity")
 @Table(name = "user")
-public class UserEntity {
+public class UserEntity extends BaseEntity{
     @Id // 기본키: 유니크
     @NotBlank
+    @Pattern(regexp="^[a-zA-Z\\d]*$")
     private String userId;
     @NotBlank
     private String userPw;
@@ -39,8 +42,7 @@ public class UserEntity {
     @NotBlank
     private String userNm;
     private String userSex;
-    @CreationTimestamp
-    private java.sql.Timestamp createDate;
+
     @NotBlank
     @Pattern(regexp = "^01(?:0|1|[6-9])-?\\d{3,4}-?\\d{4}$", message = "올바른 전화번호를 입력해주세요.")
     private String userPhNmb;
@@ -50,7 +52,7 @@ public class UserEntity {
     @Column(columnDefinition = "tinyint(1) default 0")
     private Boolean isLogin;
 
-    
-    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BoardEntity> boardList;
 }

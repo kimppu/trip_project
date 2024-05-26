@@ -1,24 +1,30 @@
 package com.example.travelproject.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.travelproject.config.exception.customExceptions.DuplicateEmailException;
+import com.example.travelproject.config.exception.customExceptions.DuplicateIdException;
 import com.example.travelproject.model.dao.UserDao;
 import com.example.travelproject.model.dto.UserDto;
 import com.example.travelproject.model.entity.UserEntity;
 import com.example.travelproject.model.repository.UserRepository;
 import com.example.travelproject.service.UserService;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@SuppressWarnings("null")
 public class UserServiceImpl implements UserService{
     
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    
+
     @Autowired
     private UserRepository userRepository;
 
@@ -37,13 +43,18 @@ public class UserServiceImpl implements UserService{
         userRepository.save(dto);
     }
 
-    public void joinUserDto(UserEntity dto) {
-        
-        // 권한 적용 
+    public void joinUserDto(UserEntity dto) throws Exception {
+        if(findByUserId(dto.getUserId()) != null){
+            throw new DuplicateIdException(dto.getUserId());
+        }
+        if(findByUserEmail(dto.getUserEmail()) != null){
+            throw new DuplicateEmailException(dto.getUserEmail());
+        }
+        // 권한 적용
         dto.setRole("USER");
-        if(dto.getUserId().equals("admin")) {
+        if (dto.getUserId().equals("admin")) {
             dto.setRole("ADMIN");
-        } else if(dto.getUserId().equals("manager")) {
+        } else if (dto.getUserId().equals("manager")) {
             dto.setRole("MANAGER");
         }
 
@@ -58,10 +69,10 @@ public class UserServiceImpl implements UserService{
         userRepository.save(dto);
     }
 
-    public void updateUserDto(UserEntity dto) {
-        UserEntity entity = userRepository.getUserDtoById(dto.getUserId());
-        log.info("[UserService][entity]: " + entity);
-        
+    public void updateUserDto(UserDto dto) {
+        UserEntity entity = userDao.findByUserId(dto.getUserId());
+        log.info("[UserServiceImpl][updateUserDto] Start: entity >>> " + entity.toString());
+
         if (dto.getUserNm() != null) {
             entity.setUserNm(dto.getUserNm());
         }
@@ -71,16 +82,52 @@ public class UserServiceImpl implements UserService{
             String encodedPwd = bCryptPasswordEncoder.encode(rawPwd);
             entity.setUserPw(encodedPwd);
         }
-        log.info("[UserService]: " + entity);
+        if(dto.getUserEmail() != null){
+            entity.setUserEmail(dto.getUserEmail());
+        }
         userRepository.save(entity);
     }
 
-    public void updatePw(UserDto dto){
-        UserEntity entity = userRepository.getUserDtoById(dto.getUserId());
-        log.info("[UserService][updatePw] Start");
-        if(dto.getUserNm()!= null){
-            entity.setUserNm(dto.getUserNm());
+    @Override
+    public String findUserIdByEmail(String userNm, String userEmail) throws Exception{
+        UserEntity entity = userRepository.getUserIdByEmail(userNm, userEmail);
+        if(entity == null){
+            throw new EntityNotFoundException();
         }
+        log.info("[UserService][findUserIdByEamil] Start");
+        return entity.getUserId();
     }
 
+    @Override
+    public UserDto findByUserEmail(String email){
+        UserEntity entity = userDao.findByUserEmail(email);
+        if (entity != null){
+            UserDto userDto = new UserDto();
+            userDto.setUserEmail(email);
+            userDto.setUserId(entity.getUserId());
+            userDto.setUserNm(entity.getUserNm());
+            return userDto;
+        }
+        return null;
+    }
+
+    public UserDto findByUserId(String userId){
+        UserEntity userEntity = userDao.findByUserId(userId);
+        if(userEntity !=null){
+            UserDto userDto = new UserDto();
+            userDto.setUserId(userEntity.getUserId());
+            userDto.setUserNm(userEntity.getUserNm());
+            userDto.setUserEmail(userEntity.getUserEmail());
+            userDto.setRole(userEntity.getRole());
+            return userDto;
+        }
+        return null;
+    }
+        
+        
+
+    @Override
+    public List<UserEntity> findAllUser() {
+        return userDao.findAllUser();
+    }
 }

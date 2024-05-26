@@ -31,29 +31,29 @@
 					<div class="col d-flex flex-row">
 						<div class="user_box ml-auto my-auto">
 							<div class="user_box_link">
-								{{#username}}
+								{{#userNm}}
 								<a class="user_info btn btn-link p-1" role="button" href="#">
 									<i class="fas fa-circle-user"></i>
-									<span>{{username}}님 반갑습니다.</span>
+									<span>{{userNm}}님 반갑습니다.</span>
 									<a class="user_logout btn btn-light my-1 px-1 py-0" role="button" href="/logout" style="font-size:15px;" >
 										로그아웃
 									</a>
-									<a class="user_mypage btn btn-light my-1 px-1 py-0" role="button" href="/mypage" style="font-size:15px;" >
+									<a class="user_mypage btn btn-light my-1 px-1 py-0" role="button" href="/user/mypage" style="font-size:15px;" >
 										마이페이지
 									</a>	
-									{{#admin}}
-										<a class="user_mypage btn btn-light my-1 px-1 py-0" role="button" href="/admin/setting" style="font-size:15px;" >
+									{{#adminYn}}
+										<a class="user_mypage btn btn-light my-1 px-1 py-0" role="button" href="/admin/admin-page" style="font-size:15px;" >
 											관리자 페이지
 										</a>	
 									</a>
-									{{/admin}}
+									{{/adminYn}}
 								</a>
-								{{/username}}
-								{{^username}}
-								<a class="user_join btn btn-light my-1 px-1 py-0" role="button" href="/loginPage" style="font-size:15px;" >
+								{{/userNm}}
+								{{^userNm}}
+								<a class="user_join btn btn-light my-1 px-1 py-0" role="button" href="/auth/login" style="font-size:15px;" >
 									로그인 / 회원가입
 								</a>
-								{{/username}}
+								{{/userNm}}
 							</div> 
 						</div>
 					</div>
@@ -68,7 +68,7 @@
 				<div class="row">
 					<div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
 						<div class="logo_container">
-							<div class="logo"><a href="/"><img src="/static/img/logo.png" alt="">TRIP(가제)</a></div>
+							<div class="logo"><a href="/"><img src="/static/img/logo.png" alt="">TRIP (가제)</a></div>
 						</div>
 						<div class="main_nav_container ml-auto">
 							<ul class="main_nav_list">
@@ -99,13 +99,13 @@
 				<!-- Slider Item -->
 				<div class="home_slider_item">
 					<!-- Image by https://unsplash.com/@anikindimitry -->
-					<div class="home_slider_background" style="background-image:url(/static/img/home_slider.jpg)"></div>
+					<div class="home_slider_background"></div>
 
-					<div class="home_slider_content text-center">
+					<!-- <div class="home_slider_content text-center">
 						<div class="home_slider_content_inner">
 							<h1 class="main_nav_item_select">홈</h1>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

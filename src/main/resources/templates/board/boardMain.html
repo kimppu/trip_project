@@ -1,53 +1,68 @@
 {{>common/header}}
 <title>게 시 판</title>
-<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
-</head>
+<link rel="stylesheet" type="text/css" href="/static/css/board/notice.css">
 <body>
 
-<div id="bbsList">
+<div class="noticeList pb-3 mb-10">
+	<div class="container">
+		<div class="notice_panel">
+			<div class="row">
+				<div class="col">
+					<h2 class="notice_title text-center">공지사항</h2>
+				</div>
+			</div>
+			<div class="row notice_head">
+				<div class="col-1 align-items-center text-center">
+					<p>번호</p>
+				</div>
+				<div class="col-6 align-items-center">
+					<p>제목</p>
+				</div>
+				<div class="col-1 align-items-center">
+					<p>작성자</p>
+				</div>	
+				<div class="col-3 align-items-center text-center">
+					<p>작성 일자</p>
+				</div>	
+				<div class="col-1 align-items-center">
+					<p>조회수</p>
+				</div>
+			</div>
+			{{#boardList}}
+			<div class="board_row row my-0">
+				<div class="col-1 d-flex py-0 text-center justify-content-center">
+					<p>{{rowNum}}</p>
+				</div>
+				<div class="col-6 d-flex py-0">
+					<a class="notice_link" href="/board/notice/{{noticeId}}"><p>{{title}}</p></a>
+				</div>
+				<div class="col-1 d-flex py-0">
+					<p>{{userId}}</p>
+				</div>	
+				<div class="col-3 d-flex py-0 justify-content-center">
+					<p>{{createDate}}</p>
+				</div>
+				<div class="col-1 d-flex justify-content-center y-0">
+					<p class="text-end">{{viewCnt}}</p>
+				</div>	
+			</div>
+			<hr class="my-0">
+			{{/boardList}}
 
-	<div id="bbsList_title">
-		게 시 판
-	</div>
-	{{#boardList}}
-	<div class="row">
-		<div class="col-1">
-			<p style="text-align:center">{{noticeId}}</p>
+			{{#adminYn}}
+			<div class="notice_btn d-flex justify-content-end">
+				<a class="btn btn-light my-1 px-1 py-0" role="button" href="/admin/notice" style="font-size:15px;" >
+					새글 등록
+				</a>
+			</div>
+			{{/adminYn}}
+				
 		</div>
-		<div class="col-5">
-			<a href="/board/notice/{{noticeId}}"><h3>{{title}}</h3></a>
-		</div>
-		<div class="col-1">
-			<h4>{{userId}}</h4>
-		</div>	
-		<div class="col-3">
-			<p>{{createDate}}</p>
-		</div>	
-		<div class="col-2">
-		</div>
-	</div>
-	<hr>
-	{{/boardList}}
-	<button type="button" onclick="location.href='/board/notice'">새글 등록</button>
-	
-	<!-- <div id="bbsList_header">
-		<div id="leftHeader">
-		<form action="" method="post" name="searchForm">
-			<select name="searchKey" class="selectField">
-				<option value="subject">제목</option>
-				<option value="name">작성자</option>
-				<option value="content">내용</option>
-			</select>
-			<input type="text" name="searchValue" class="textField"/>
-			<input type="button" value=" 검 색 " class="btn2" onclick="sendIt();"/>		
-		</form>				
-		</div>
-		<div id="rightHeader">
-			<input type="button" value=" 글올리기 " class="btn2" 
-			onclick="javascript:location.href='<%=cp%>/board/created.jsp';"/>			
-		</div>	 -->
 	</div>
 </div>
 </body>
-<script src="/static/js/bootstrap.min.js"></script>
-{{>common/footer}}
+<!-- <script src="/static/js/bootstrap.min.js"></script> -->
+
+{{>common/footer}}	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>

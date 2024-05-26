@@ -1,6 +1,6 @@
 package com.example.travelproject.model.entity;
 
-import org.hibernate.annotations.CreationTimestamp;
+import com.example.travelproject.model.base.BaseEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,15 +23,15 @@ import lombok.ToString;
 @ToString
 @Entity(name = "CommentEntity")
 @Table(name = "comment")
-public class CommentEntity {
+public class CommentEntity extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long commentId;
+    private Long commentId;
     
     @ManyToOne
     @JoinColumn(name = "notice_id")
-    private BoardEntity notice; // 게시판 엔티티에 대한 참조
+    private BoardEntity board; // 게시판 엔티티에 대한 참조
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -40,6 +40,4 @@ public class CommentEntity {
     @Column(nullable = false)
     private String contents;
 
-    @CreationTimestamp
-    private java.sql.Timestamp createDate;
 }

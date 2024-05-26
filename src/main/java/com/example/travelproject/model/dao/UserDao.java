@@ -1,9 +1,10 @@
 package com.example.travelproject.model.dao;
 
+import java.util.List;
+
 import com.example.travelproject.model.entity.UserEntity;
 
 public interface UserDao {
-    
 
     public void deleteUser(String userId);
 
@@ -12,4 +13,10 @@ public interface UserDao {
     public void insertUser(UserEntity entity);
 
     public void updateUser(UserEntity entity);
+
+    public UserEntity findByUserEmail(String userNm, String userEmail);
+
+    public UserEntity findByUserEmail(String userEmail);
+
+    public List<UserEntity> findAllUser();
 }
